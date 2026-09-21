@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SOMATRAC Matériaux — Catalogue Commercial</title>
+<script>tailwind.config = { corePlugins: { preflight: false } };</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+
+  :root{
+    --orange: #E15A28;
+    --orange-dark: #B9431A;
+    --charcoal: #4A4A4C;
+    --near-black: #262524;
+    --concrete: #C9C6C0;
+    --concrete-light: #E4E1DA;
+    --paper: #F6F5F2;
+    --line: #d8d5cd;
+    --orange-soft: #fff0e8;
+    --shadow: 0 18px 45px rgba(38,37,36,.12);
+  }
+§//
+  *{ box-sizing:border-box; }
+
+  @page{
+    size:A4 portrait;
+    margin:0;
+  }
+
+  html,body{
+    margin:0; padding:0;
+    background:#78766f;
+    font-family:"Inter","Segoe UI","Helvetica Neue",Arial,sans-serif;
+    color:var(--near-black);
+    scroll-behavior:smooth;
+  }
+
+  .page{
+    width:210mm;
+    min-height:297mm;
+    margin:10mm auto;
+    background:var(--paper);
+    position:relative;
+    overflow:hidden;
+    padding:16mm 15mm 18mm 15mm;
+    box-shadow:var(--shadow);
+    animation:pageReveal .65s ease both;
+  }
+
+  @keyframes pageReveal{ from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:none; } }
+
+  .screen-nav{ position:sticky; top:0; z-index:20; max-width:210mm; margin:0 auto 10mm; padding:12px 16px; display:flex; align-items:center; gap:16px; background:rgba(246,245,242,.94); border:1px solid rgba(216,213,205,.9); box-shadow:0 10px 26px rgba(38,37,36,.1); backdrop-filter:blur(12px); }
+  .screen-nav img{ width:128px; height:auto; display:block; }
+  .screen-nav .nav-label{ flex:1; color:var(--charcoal); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+  .screen-nav .nav-links{ display:flex; flex-wrap:wrap; gap:6px; }
+  .screen-nav button{ border:1px solid var(--line); background:#fff; color:var(--charcoal); padding:7px 9px; font:600 10px "Segoe UI",sans-serif; cursor:pointer; transition:background .2s,color .2s,border-color .2s,transform .2s; }
+  .screen-nav button:hover,.screen-nav button.active{ background:var(--orange); border-color:var(--orange); color:#fff; transform:translateY(-1px); }
+
+  @media print{
+    html,body{ background:#fff; }
+    .page{
+      margin:0;
+      box-shadow:none;
+      break-after:auto;
+      page-break-after:auto;
+      width:auto; min-height:297mm; height:297mm;
+      overflow:visible;
+    }
+    .page:not(.cover){ break-before:page; page-break-before:always; }
+    .page.print-compact .grid{ gap:3mm; margin-top:4mm; }
+    .page.print-compact .card .photo{ aspect-ratio:1.5/1; }
+    .page.print-compact .card .photo.has-dimension{ grid-template-columns:minmax(0, 1.9fr) minmax(44px, .55fr); padding:4px; }
+    .page.print-compact .card .photo.has-dimension img{ padding:0; min-height:0; max-height:100%; }
+    .page.print-compact .card .body{ padding:5px 8px 6px; }
+    .page.edging-page .card .photo{ aspect-ratio:1.95/1; }
+    .page.print-compact .card .specs{ margin-top:3px; font-size:10px; line-height:1.35; }
+    .page.print-compact .note-box{ margin-top:5mm; padding:7px 9px; min-height:13mm; font-size:9.5px; line-height:1.5; overflow:visible; }
+    .running-head .brand{ width:142px; flex:0 0 142px; overflow:visible; }
+    .running-head .brand-logo{ width:132px; max-width:none; }
+    .no-print{ display:none !important; }
+    .screen-nav{ display:none !important; }
+    .page{ animation:none; box-shadow:none; }
+  }
+
+  @media(max-width:700px){
+    .screen-nav{ margin:0 10px 10px; align-items:flex-start; flex-wrap:wrap; }
+    .screen-nav .nav-label{ flex-basis:calc(100% - 145px); }
+    .screen-nav .nav-links{ width:100%; overflow-x:auto; flex-wrap:nowrap; padding-bottom:2px; }
+    .page{ width:calc(100% - 20px); min-height:0; margin:10px; padding:28px 20px 55px; }
+  }
+
+  .no-print{
+    max-width:210mm; margin:10mm auto; background:#fff3ea;
+    border:1px solid var(--orange); padding:14px 18px; font-size:13.5px;
+    line-height:1.55; border-radius:2px; color:#3a3a3a;
+  }
+  .no-print h3{ margin:0 0 6px 0; color:var(--orange-dark); font-size:15px; }
+  .no-print code{ background:#fff; padding:1px 5px; border:1px solid #eaddd2; }
+
+  h1,h2,h3,h4{ font-family:"Oswald","Arial Narrow",sans-serif; margin:0; font-weight:600; }
+  p{ margin:0; }
+
+  .eyebrow-line{
+    display:flex; align-items:center; gap:10px;
+    color:var(--orange-dark); font-size:12px; letter-spacing:.02em;
+    margin-bottom:6px;
+  }
+  .eyebrow-line .num{ font-family:"Oswald",sans-serif; font-weight:600; font-size:13px; }
+  .eyebrow-line .rule{ flex:1; height:1px; background:var(--line); }
+
+  .running-head{
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:2px solid var(--near-black); padding-bottom:8px; margin-bottom:14px;
+  }
+  .running-head .brand{ display:flex; align-items:center; gap:10px; overflow:visible; }
+  .brand-logo{ width:154px; max-width:none; height:auto; display:block; object-fit:contain; }
+  .running-head .section-tag{ font-family:"Oswald",sans-serif; font-size:12px; color:var(--charcoal); }
+
+  .running-foot{
+    position:absolute; bottom:10mm; left:15mm; right:15mm;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:9.5px; color:var(--charcoal); border-top:1px solid var(--line); padding-top:6px;
+  }
+
+  .cover-modern{ padding:0; overflow:hidden; background:#fff; color:#1f2937; display:flex; flex-direction:column; }
+  .cover-modern .cover-header{ min-height:65mm; padding:12mm 14mm 10mm; position:relative; overflow:hidden; background:linear-gradient(125deg,#102b65 0%,#1e3a8a 62%,#10204b 100%); }
+  .cover-modern .cover-header::after{ content:""; position:absolute; right:-21mm; bottom:-28mm; width:94mm; height:80mm; transform:rotate(-24deg); background:rgba(217,119,6,.96); clip-path:polygon(48% 0,100% 0,100% 100%,0 100%); }
+  .cover-modern .cover-header::before{ content:""; position:absolute; right:24mm; bottom:-25mm; z-index:1; width:4mm; height:85mm; transform:rotate(37deg); background:#fff; opacity:.9; }
+  .cover-modern .cover-brand{ position:relative; z-index:2; display:flex; align-items:center; }
+  .cover-modern .cover-brand-logo{ width:62mm; max-height:39mm; object-fit:contain; padding:2.5mm 4mm; background:#fff; box-shadow:5px 5px 0 rgba(217,119,6,.48); }
+  .cover-modern .cover-tagline{ position:relative; z-index:2; margin:4mm 0 0; color:#dce5f6; font:600 9px/1.4 Arial,sans-serif; letter-spacing:.22em; }
+  .cover-modern .cover-hero{ height:106mm; position:relative; overflow:hidden; background:#182849; }
+  .cover-modern .cover-hero img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block; filter:saturate(.82) contrast(1.05); }
+  .cover-modern .cover-hero::before{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(110deg,rgba(15,34,78,.77) 0%,rgba(15,34,78,.22) 48%,rgba(0,0,0,.04) 100%); }
+  .cover-modern .cover-hero::after{ content:""; position:absolute; z-index:2; left:-18mm; bottom:-30mm; width:110mm; height:75mm; background:#d97706; opacity:.95; transform:rotate(-22deg); clip-path:polygon(0 0,100% 0,72% 100%,0 100%); }
+  .cover-modern .cover-hero-label{ position:absolute; z-index:3; left:14mm; bottom:14mm; width:64mm; color:#fff; font:700 10px/1.45 Arial,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
+  .cover-modern .cover-title-band{ min-height:60mm; padding:10mm 14mm 8mm; background:#132e67; position:relative; overflow:hidden; flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .cover-modern .cover-title-band::after{ content:""; position:absolute; top:0; right:0; width:48mm; height:100%; background:#d97706; clip-path:polygon(62% 0,100% 0,100% 100%,0 100%); }
+  .cover-modern .cover-title{ position:relative; z-index:1; color:#fff; font:800 30px/.98 Arial,sans-serif; letter-spacing:.025em; }
+  .cover-modern .cover-activities{ position:relative; z-index:1; margin-top:5mm; padding-top:4mm; border-top:1px solid rgba(255,255,255,.38); color:#fbbf24; font:700 8.5px/1.45 Arial,sans-serif; letter-spacing:.09em; }
+  .cover-modern .cover-footer{ margin-top:auto; min-height:47mm; padding:0; position:relative; overflow:hidden; background:linear-gradient(125deg,#102b65 0%,#1e3a8a 62%,#10204b 100%); border-top:1.5mm solid #d97706; }
+  .cover-modern .cover-footer::after{ content:""; position:absolute; right:-18mm; bottom:-30mm; width:100mm; height:72mm; transform:rotate(-22deg); background:#d97706; clip-path:polygon(46% 0,100% 0,100% 100%,0 100%); }
+  @media print{
+    .cover-modern,.cover-modern *{
+      -webkit-print-color-adjust:exact !important;
+      print-color-adjust:exact !important;
+      color-adjust:exact !important;
+    }
+    .cover-modern .cover-header{ background:#1e3a8a !important; }
+    .cover-modern .cover-hero{ background:#182849 !important; }
+    .cover-modern .cover-hero img{ display:block !important; visibility:visible !important; opacity:1 !important; }
+    .cover-modern .cover-title-band{ background:#132e67 !important; }
+    .cover-modern .cover-footer{ background:#1e3a8a !important; }
+  }
+  @media(max-width:700px){ .cover-modern .cover-header{ min-height:190px; padding:36px 38px 28px; }.cover-modern .cover-brand-logo{ width:205px; max-height:128px; }.cover-modern .cover-hero{ height:310px; }.cover-modern .cover-title-band{ min-height:190px; padding:38px; }.cover-modern .cover-footer{ min-height:140px; } }
+
+  .toc-list{ margin-top:6mm; }
+  .toc-item{
+    display:flex; align-items:baseline; gap:14px; padding:8px 0; border-bottom:1px solid var(--line);
+  }
+  .toc-link{ display:flex; align-items:baseline; gap:14px; width:100%; color:inherit; text-decoration:none; }
+  .toc-link:hover .t{ color:var(--orange-dark); }
+  .toc-item .n{ font-family:"Oswald",sans-serif; font-size:19px; color:var(--orange); width:34px; }
+  .toc-item .t{ font-family:"Oswald",sans-serif; font-size:16.5px; flex:1; }
+  .toc-item .d{ font-size:11.5px; color:var(--charcoal); max-width:32ch; text-align:right; }
+  .toc-item.sub{ padding:5px 0 5px 24px; }
+  .toc-item.sub .n{ font-size:12.5px; width:34px; color:var(--charcoal); }
+  .toc-item.sub .t{ font-size:13px; color:var(--near-black); font-family:"Inter",sans-serif; font-weight:600; }
+
+  .intro-block{
+    margin-top:7mm; padding:9mm; background:var(--concrete-light); border-left:4px solid var(--orange);
+  }
+  .intro-block p{ font-size:12.5px; line-height:1.55; color:#333; }
+  .intro-block p + p{ margin-top:8px; }
+  .intro-points{ display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+  .intro-points span{ background:var(--near-black); color:#fff; padding:6px 9px; font-family:"Oswald","Arial Narrow",sans-serif; font-size:10px; letter-spacing:.05em; }
+
+  .factory-strip{ margin-top:9mm; }
+  .factory-strip-photos{ display:flex; gap:4mm; }
+  .factory-strip-photos img{ width:calc(33.333% - 2.7mm); height:34mm; object-fit:cover; display:block; border:1px solid var(--line); filter:saturate(.92) contrast(1.03); }
+  .factory-strip-caption{ margin-top:6px; font-size:11px; line-height:1.5; color:var(--charcoal); }
+  .factory-strip-caption b{ color:var(--near-black); }
+
+  .paves-intro-layout{ display:flex; gap:10mm; margin-top:9mm; align-items:flex-start; }
+  .paves-intro-copy{ flex:1.05; }
+  .paves-intro-copy p{ font-size:13.5px; line-height:1.7; color:#333; }
+  .paves-intro-copy p + p{ margin-top:10px; }
+  .benefit-list{ list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .benefit-list li{ position:relative; padding-left:20px; font-size:12.5px; color:var(--near-black); font-weight:600; }
+  .benefit-list li::before{ content:""; position:absolute; left:0; top:5px; width:9px; height:9px; background:var(--orange); }
+  .paves-intro-gallery{ flex:.85; display:flex; flex-direction:column; gap:4mm; }
+  .paves-intro-gallery img{ width:100%; height:38mm; object-fit:cover; display:block; border:1px solid var(--line); }
+  .paves-intro-gallery img:first-child{ height:56mm; }
+  @media(max-width:700px){ .paves-intro-layout{ flex-direction:column; } .factory-strip-photos{ flex-wrap:wrap; } .factory-strip-photos img{ width:calc(50% - 2mm); height:120px; } }
+
+  .about-hero{ margin-top:9mm; height:56mm; position:relative; overflow:hidden; border:1px solid var(--line); }
+  .about-hero img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.92) contrast(1.03); }
+  .about-hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(20,19,18,.72) 0%, rgba(20,19,18,0) 55%); }
+  .about-hero-label{ position:absolute; left:8mm; bottom:6mm; z-index:1; color:#fff; font-family:"Oswald","Arial Narrow",sans-serif; font-size:13px; letter-spacing:.04em; }
+  .about-copy{ margin-top:9mm; display:flex; gap:10mm; }
+  .about-copy p{ flex:1; font-size:13px; line-height:1.7; color:#333; }
+  .about-values{ margin-top:10mm; display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; }
+  .about-values .value-item{ border-top:4px solid var(--orange); padding:9px 0 0 0; }
+  .about-values .value-item h3{ font-size:15px; color:var(--near-black); }
+  .about-values .value-item p{ margin-top:4px; font-size:11.5px; line-height:1.5; color:var(--charcoal); }
+  .about-strip{ margin-top:10mm; }
+  .about-strip-photos{ display:flex; gap:4mm; }
+  .about-strip-photos img{ width:calc(33.333% - 2.7mm); height:27mm; object-fit:cover; display:block; border:1px solid var(--line); filter:saturate(.92) contrast(1.03); }
+  @media(max-width:700px){ .about-copy{ flex-direction:column; gap:4mm; } .about-values{ grid-template-columns:1fr; } .about-strip-photos{ flex-wrap:wrap; } .about-strip-photos img{ width:calc(50% - 2mm); height:110px; } }
+
+  .divider-page{ display:flex; flex-direction:column; }
+  .divider-photo{ margin-top:9mm; height:92mm; position:relative; overflow:hidden; border:1px solid var(--line); flex:none; }
+  .divider-photo img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.92) contrast(1.03); }
+  .divider-photo::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(20,19,18,.7) 0%, rgba(20,19,18,0) 55%); }
+  .divider-photo-label{ position:absolute; left:8mm; bottom:6mm; z-index:1; color:#fff; font-family:"Oswald","Arial Narrow",sans-serif; font-size:13px; letter-spacing:.04em; }
+  .divider-copy{ margin-top:9mm; max-width:155mm; }
+  .divider-copy p{ font-size:13.5px; line-height:1.7; color:#333; }
+  .divider-copy p + p{ margin-top:10px; }
+  .divider-sub-tags{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+  .divider-sub-tag{ display:inline-block; font-family:"Oswald","Arial Narrow",sans-serif; font-size:11px; letter-spacing:.08em; color:var(--orange-dark); background:var(--orange-soft); padding:4px 10px; }
+
+  .section-title{ margin:2mm 0 3mm 0; }
+  .section-title h2{ font-size:27px; }
+  .section-title .sub{ font-size:12.5px; color:var(--charcoal); margin-top:3px; }
+
+  .grid{
+    display:flex; flex-wrap:wrap ; gap:6mm; margin-top:8mm;
+  }
+  .card{
+    border:1px solid var(--line); background:#fff; display:flex; flex-direction:column;
+    width:calc(50% - 3mm);
+  }
+  .card .photo{
+    aspect-ratio:1.35/1; background:repeating-linear-gradient(135deg, #eee, #eee 10px, #e6e3dc 10px, #e6e3dc 20px);
+    display:flex; align-items:center; justify-content:center; position:relative; border-bottom:1px solid var(--line); overflow:hidden;
+  }
+  .card .photo .icon{ width:34%; }
+  .card .photo img{ width:100%; height:100%; object-fit:contain; padding:8px; display:block; }
+  .card .photo .ph-label{
+    position:absolute; bottom:6px; right:8px; font-size:8.5px; letter-spacing:.05em; color:#9c988f; font-family:"Oswald",sans-serif;
+  }
+  .card .body{ padding:9px 12px 11px 12px; }
+  @media screen and (min-width:701px){ .card{ transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease; } .card:hover{ transform:translateY(-5px); box-shadow:0 14px 28px rgba(38,37,36,.14); border-color:var(--orange); } }
+  .card .ref{ font-family:"Oswald",sans-serif; font-size:10.5px; color:var(--orange-dark); }
+  .card .name{ font-family:"Oswald",sans-serif; font-size:15.5px; margin-top:1px; }
+  .card .specs{ margin-top:6px; font-size:11px; color:var(--charcoal); line-height:1.55; }
+  .card .specs::before{ content:"EN UN COUP D'ŒIL"; display:block; margin-bottom:4px; color:var(--orange-dark); font:700 8px "Segoe UI",sans-serif; letter-spacing:.08em; }
+  .card .specs b{ color:var(--near-black); }
+
+  .spec-hero{ display:flex; gap:10mm; margin-top:8mm; align-items:flex-start; }
+  .spec-hero .photo{
+    flex:0 0 78mm; height:58mm; background:repeating-linear-gradient(135deg, #eee, #eee 10px, #e6e3dc 10px, #e6e3dc 20px);
+    display:flex; align-items:center; justify-content:center; border:1px solid var(--charcoal); position:relative;
+  }
+  .spec-hero .photo .ph-label{ position:absolute; bottom:6px; right:8px; font-size:8.5px; color:#9c988f; font-family:"Oswald",sans-serif; }
+  .spec-hero .photo img{ width:100%; height:100%; object-fit:contain; padding:8px; display:block; }
+  .spec-hero .drawing{ flex:1; }
+  .spec-hero .drawing svg{ width:100%; height:auto; }
+  .spec-hero .ref-badge{
+    display:inline-block; background:var(--near-black); color:#fff; font-family:"Oswald",sans-serif;
+    font-size:13px; padding:4px 10px; margin-bottom:8px;
+  }
+
+  table.specs-table{ width:100%; border-collapse:collapse; margin-top:9mm; font-size:11.5px; }
+  table.specs-table th, table.specs-table td{
+    border:1px solid var(--line); padding:7px 9px; text-align:left;
+  }
+  table.specs-table th{ background:var(--near-black); color:#fff; font-family:"Oswald",sans-serif; font-weight:500; font-size:11px; }
+  table.specs-table tr:nth-child(even) td{ background:#fbfaf8; }
+  table.specs-table td.fill{ color:#b7b2a6; font-style:italic; }
+
+  .ref-family{ margin-top:10mm; }
+  .ref-family h3{ font-size:15px; margin-bottom:5px; }
+  .ref-pills{ display:flex; flex-wrap:wrap; gap:7px; margin-top:6px; }
+  .pill{
+    border:1px solid var(--near-black); font-family:"Oswald",sans-serif; font-size:12px;
+    padding:5px 11px; color:var(--near-black);
+  }
+  .pill.hi{ background:var(--orange); border-color:var(--orange); color:#fff; }
+
+  .note-box{
+    margin-top:9mm; border:1px dashed var(--charcoal); padding:9px 12px; font-size:10.5px; color:var(--charcoal); line-height:1.6;
+  }
+  .service-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8mm; margin-top:10mm; }
+  .service-item{ border-top:4px solid var(--orange); padding:10px 0 0 0; }
+  .service-item h3{ font-size:17px; color:var(--near-black); }
+  .service-item p{ margin-top:5px; font-size:12px; line-height:1.55; color:var(--charcoal); }
+  .cta-panel{ margin-top:13mm; padding:12mm; background:var(--near-black); color:#fff; display:flex; justify-content:space-between; align-items:end; gap:10mm; }
+  .cta-panel h3{ color:#fff; font-size:24px; max-width:14ch; }
+  .cta-panel p{ color:#e9e8e5; font-size:12px; line-height:1.5; max-width:34ch; }
+  .cta-panel .cta-label{ color:var(--orange); font-family:"Oswald","Arial Narrow",sans-serif; font-size:12px; letter-spacing:.08em; margin-bottom:5px; }
+  @media(max-width:700px){ .service-grid{ grid-template-columns:1fr; } .cta-panel{ display:block; } .cta-panel p{ margin-top:10px; } }
+
+  .back{ background:var(--near-black); color:#fff; display:flex; flex-direction:column; justify-content:space-between; padding:0; }
+  .back-top{ padding:20mm 15mm 0 15mm; }
+  .back-top .cover-logo{ background:#fff; display:inline-block; padding:10px 16px; }
+  .back-top h2{ color:#fff; font-size:26px; margin-top:14mm; max-width:20ch; }
+  .back-contact{ padding:15mm; display:flex; flex-wrap:wrap; gap:8mm; border-top:1px solid #4a4a4c; }
+  .back-contact > div{ width:calc(50% - 4mm); }
+  .back-contact .label{ font-family:"Oswald",sans-serif; color:var(--orange); font-size:11px; letter-spacing:.03em; margin-bottom:4px; }
+  .back-contact .val{ font-size:13.5px; color:#e9e8e5; }
+  .back-strip{ height:14mm; background:linear-gradient(90deg, var(--orange), var(--orange-dark)); }
+
+  .legacy-catalog-page{ display:none; }
+  .product-sheet{ display:block; }
+  .product-sheet .sheet-kicker{ font-size:30px; font-weight:800; color:#6c6d70; letter-spacing:.03em; }
+  .product-sheet .sheet-family{ margin-top:2px; color:var(--orange-dark); font:700 22px "Oswald","Arial Narrow",sans-serif; text-transform:uppercase; }
+  .product-sheet .sheet-rule{ height:3px; background:var(--near-black); margin-top:9px; }
+  .product-sheet .sheet-hero{ height:105mm; margin-top:8mm; display:grid; grid-template-columns:1.75fr .85fr; gap:8mm; align-items:stretch; border-bottom:2px solid var(--near-black); overflow:hidden; }
+  .product-sheet .sheet-image{ height:100%; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(135deg, #f1efea, #f1efea 10px, #e9e6df 10px, #e9e6df 20px); border:1px solid var(--line); }
+  .product-sheet .sheet-image img{ width:100%; height:100%; object-fit:contain; padding:8mm; display:block; }
+  .product-sheet .sheet-side{ display:flex; flex-direction:column; gap:8mm; height:100%; justify-content:center; }
+  .product-sheet .sheet-ref{ color:#737477; font:700 27px "Oswald","Arial Narrow",sans-serif; border-bottom:2px solid #737477; padding-bottom:6px; }
+  .product-sheet .sheet-ref span{ display:block; font-size:13px; color:var(--orange-dark); letter-spacing:.06em; margin-bottom:4px; }
+  .product-sheet .sheet-format{ border:1px solid var(--charcoal); padding:9px 12px; }
+  .product-sheet .sheet-format span{ display:block; font-family:"Oswald",sans-serif; font-size:11px; color:var(--orange-dark); letter-spacing:.06em; margin-bottom:4px; }
+  .product-sheet .sheet-format b{ display:block; font-family:"Oswald","Arial Narrow",sans-serif; font-size:15px; font-weight:600; color:var(--near-black); line-height:1.3; }
+  .product-sheet .sheet-lower{ display:grid; grid-template-columns:1.55fr .9fr; gap:8mm; margin-top:8mm; flex:none; }
+  .product-sheet .sheet-info h3,.product-sheet .sheet-copy h3{ color:#737477; font:700 20px "Oswald","Arial Narrow",sans-serif; border-bottom:2px solid #737477; padding-bottom:4px; }
+  .product-sheet .sheet-info{ color:#77797b; font-size:12px; line-height:1.55; }
+  .product-sheet .sheet-info p{ padding:4px 0; border-bottom:1px solid #e0ded9; }
+  .product-sheet .sheet-info b{ color:var(--near-black); }
+  .product-sheet .technical-details{ margin-top:7px; }
+  .product-sheet .technical-details table{ width:100%; border-collapse:collapse; font-size:11px; }
+  .product-sheet .technical-details th,.product-sheet .technical-details td{ padding:6px 8px; border:1px solid #d8d6d0; text-align:left; }
+  .product-sheet .technical-details th{ width:54%; color:var(--near-black); background:#f2f0eb; font-weight:700; }
+  .product-sheet .technical-details tr:nth-child(even) td{ background:#fbfaf8; }
+  .product-sheet .sheet-copy{ color:var(--charcoal); font-size:13px; line-height:1.55; }
+  .product-sheet .sheet-copy p + p{ margin-top:10px; }
+  .product-sheet .sheet-copy strong{ color:var(--near-black); }
+  .product-sheet .sheet-callout{ margin-top:8mm; color:var(--orange-dark); font-weight:700; font-size:11px; letter-spacing:.03em; }
+  /* Fiche H6/H8 : tableau détaillé maintenu sur une seule page A4. */
+  .product-sheet.compact-product-sheet{ padding-top:11mm; padding-bottom:13mm; }
+  .product-sheet.compact-product-sheet .sheet-kicker{ font-size:25px; }
+  .product-sheet.compact-product-sheet .sheet-family{ font-size:19px; }
+  .product-sheet.compact-product-sheet .sheet-rule{ margin-top:5px; }
+  .product-sheet.compact-product-sheet .sheet-hero{ flex:0 0 47mm; min-height:0; margin-top:4mm; gap:7mm; }
+  .product-sheet.compact-product-sheet .sheet-image img{ max-height:45mm; padding:2mm; }
+  .product-sheet.compact-product-sheet .sheet-side{ gap:4mm; }
+  .product-sheet.compact-product-sheet .sheet-ref{ font-size:21px; }
+  .product-sheet.compact-product-sheet .sheet-format{ padding:6px 9px; }
+  .product-sheet.compact-product-sheet .sheet-format b{ font-size:12.5px; }
+  .product-sheet.compact-product-sheet .sheet-lower{ gap:7mm; margin-top:8mm; }
+  .product-sheet.compact-product-sheet .sheet-info h3,.product-sheet.compact-product-sheet .sheet-copy h3{ font-size:18px; padding-bottom:3px; }
+  .product-sheet.compact-product-sheet .sheet-info{ font-size:11px; line-height:1.35; }
+  .product-sheet.compact-product-sheet .sheet-info p{ padding:3px 0; }
+  .product-sheet.compact-product-sheet .technical-details{ margin-top:5px; }
+  .product-sheet.compact-product-sheet .technical-details table{ font-size:10px; line-height:1.2; }
+  .product-sheet.compact-product-sheet .technical-details th,.product-sheet.compact-product-sheet .technical-details td{ padding:3.5px 6px; }
+  .product-sheet.compact-product-sheet .sheet-copy{ font-size:12px; line-height:1.45; }
+  .product-sheet.compact-product-sheet .sheet-copy p + p{ margin-top:6px; }
+  .product-sheet.compact-product-sheet .sheet-callout{ margin-top:5mm; font-size:9px; }
+  @media print{ .product-sheet.compact-product-sheet .sheet-hero{ height:47mm; } }
+  @media(max-width:700px){ .product-sheet .sheet-hero{ height:auto; min-height:0; grid-template-columns:1fr; gap:4mm; padding:4mm 0 8mm; } .product-sheet .sheet-image{ height:70mm; } .product-sheet .sheet-side{ flex-direction:row; gap:4mm; height:auto; } .product-sheet .sheet-ref{ font-size:23px; } .product-sheet .sheet-lower{ grid-template-columns:1fr; gap:6mm; } }
+
+</style>
+</head>
+<body>
+
+<nav class="screen-nav" aria-label="Navigation du catalogue">
+  <img src="logo.png" alt="SOMATRAC Matériaux">
+  <span class="nav-label">Catalogue commercial 2026</span>
+  <div class="nav-links">
+    <button class="active" data-target="catalogue-top">Accueil</button>
+    <button data-target="about">À propos</button>
+    <button data-target="paves">Pavés</button>
+    <button data-target="dalles">Dalles</button>
+    <button data-target="edging">Bordures</button>
+    <button data-target="caniveaux">Caniveaux</button>
+    <button data-target="agglos">Agglos</button>
+    <button data-target="hourdis">Hourdis</button>
+    <button data-target="poutrelles">Poutrelles</button>
+    <button data-target="services">Devis</button>
+  </div>
+</nav>
+
+<div class="no-print">
+  <h3>Catalogue commercial SOMATRAC</h3>
+  Ce fichier est prêt à imprimer : ouvrez-le dans un navigateur puis faites <code>Fichier → Imprimer → Enregistrer en PDF</code> (format A4, marges "Aucune").<br><br>
+  <b>Images :</b> les visuels produits et les photos d'usine sont déjà reliés depuis le dossier du catalogue. Remplacez uniquement les fichiers source si vous disposez de photos officielles de meilleure qualité.<br><br>
+  <b>Avant diffusion :</b> les coordonnées de la page 2 et du dos de couverture ont été reprises depuis vos supports d'expédition — merci de les vérifier avant impression finale, ainsi que les formats disponibles selon votre projet.
+</div>
+
+<!-- PAGE 1 — COVER -->
+<div class="page cover-modern" id="catalogue-top">
+  <header class="cover-header">
+    <div class="cover-brand">
+      <img class="cover-brand-logo" src="logo.png" alt="Logo SOMATRAC Matériaux">
+    </div>
+    <p class="cover-tagline">EXPERTS EN TRAVAUX PUBLICS</p>
+  </header>
+
+  <section class="cover-hero" aria-label="Usine de production SOMATRAC Matériaux">
+    <img src="usine-vue-aerienne.jpg" alt="Vue aérienne de l'usine de production SOMATRAC Matériaux à Agadir">
+    <div class="cover-hero-label">Fabricant direct<br>usine &amp; stock<br>à Agadir</div>
+  </section>
+
+  <section class="cover-title-band">
+    <h1 class="cover-title">CATALOGUE<br>2026/2027</h1>
+    <p class="cover-activities">MATÉRIAUX <span class="text-white">—</span> AMÉNAGEMENT <span class="text-white">—</span> VOIRIE <span class="text-white">—</span> PAVAGE</p>
+  </section>
+
+  <footer class="cover-footer" aria-label="Bandeau décoratif"></footer>
+</div>
+
+<!-- PAGE 2 — À PROPOS -->
+<div class="page" id="about">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">À PROPOS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">—</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Qui sommes-nous</h2>
+    <div class="sub">Un fabricant de matériaux béton, implanté à Agadir, au service de vos chantiers.</div>
+  </div>
+
+  <div class="about-hero">
+    <img src="usine-cour-2.jpg" alt="Cour de production et stockage de l'usine SOMATRAC Matériaux à Agadir">
+    <div class="about-hero-label">SOMATRAC Matériaux — Usine, route de Taroudant, Agadir</div>
+  </div>
+
+  <div class="about-copy">
+    <p><b>SOMATRAC Matériaux</b> conçoit et fabrique des produits en béton — pavés, bordures, dalles, caniveaux, hourdis, poutrelles et blocs — depuis sa propre unité de production à Agadir. En tant que fabricant direct, nous maîtrisons chaque étape : matières premières, fabrication, stockage et livraison, sans intermédiaire.</p>
+    <p>Notre équipe accompagne les entreprises de travaux publics, les bureaux d'études et les particuliers dans le choix des produits adaptés à leur projet, avec un stock disponible et une réactivité de proximité. Chaque référence de ce catalogue est fabriquée pour répondre aux exigences de résistance et de durabilité des chantiers marocains.</p>
+  </div>
+
+  <div class="about-values">
+    <div class="value-item"><h3>Fabricant direct</h3><p>Production, stockage et expédition gérés en interne, du moulage à la livraison chantier.</p></div>
+    <div class="value-item"><h3>Stock disponible</h3><p>Des références courantes disponibles en stock pour répondre rapidement à vos besoins.</p></div>
+    <div class="value-item"><h3>Conseil technique</h3><p>Un accompagnement pour choisir la forme, l'épaisseur et la finition adaptées à votre usage.</p></div>
+    <div class="value-item"><h3>Livraison chantier</h3><p>Une logistique organisée selon la quantité, la destination et le planning de votre projet.</p></div>
+  </div>
+
+  <div class="about-strip">
+    <div class="about-strip-photos">
+      <img src="usine-cour-4.jpg" alt="Stock de blocs béton SOMATRAC">
+      <img src="poutrelle-detail.jpg" alt="Détail d'une poutrelle béton précontrainte SOMATRAC">
+      <img src="expedition-2.jpg" alt="Chargement de pavés SOMATRAC pour livraison">
+    </div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE 3 — SOMMAIRE / INTRO -->
+<div class="page" id="contents">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">SOMMAIRE</div>
+  </div>
+
+  <div class="section-title">
+    <h2>Sommaire</h2>
+  </div>
+
+  <div class="toc-list">
+    <div class="toc-item"><a class="toc-link" href="#about"><div class="n">—</div><div class="t">À propos</div><div class="d">Qui sommes-nous, notre usine et nos engagements</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#revetement"><div class="n">01</div><div class="t">Revêtement extérieur</div><div class="d">Pavés et dalles pour vos sols extérieurs</div></a></div>
+    <div class="toc-item sub"><a class="toc-link" href="#paves"><div class="n">01.1</div><div class="t">Pavés</div><div class="d">Formes courantes pour trottoirs et voiries piétonnes</div></a></div>
+    <div class="toc-item sub"><a class="toc-link" href="#dalles-intro"><div class="n">01.2</div><div class="t">Dalles</div><div class="d">Revsol, pavé gazon et finitions de sol</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#bordures-intro"><div class="n">02</div><div class="t">Bordures</div><div class="d">Gamme T, bordure américaine et F</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#caniveaux-intro"><div class="n">03</div><div class="t">Caniveaux</div><div class="d">Collecte et évacuation des eaux pluviales</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#agglos-intro"><div class="n">04</div><div class="t">Agglos</div><div class="d">Blocs béton pour murs et cloisons</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#hourdis-intro"><div class="n">05</div><div class="t">Hourdis</div><div class="d">Éléments de remplissage pour planchers</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#poutrelles-intro"><div class="n">06</div><div class="t">Poutrelles</div><div class="d">Éléments préfabriqués pour planchers béton</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#services"><div class="n">07</div><div class="t">Services &amp; demande de devis</div><div class="d">Accompagnement, disponibilité et livraison</div></a></div>
+  </div>
+
+  <div class="intro-block">
+    <p><b>SOMATRAC Matériaux</b> est un fabricant marocain de produits en béton, implanté à Agadir. Nous concevons, produisons et livrons depuis notre propre usine — sans intermédiaire — pour accompagner vos projets de construction, de voirie et d'aménagement extérieur avec des produits conçus pour durer.</p>
+    <p>Découvrez nos solutions par univers : pavés, dalles, bordures, caniveaux, hourdis, poutrelles et blocs béton. Choisissez un produit, repérez sa référence et contactez-nous pour une offre adaptée à votre chantier.</p>
+    <div class="intro-points"><span>FABRICATION BÉTON</span><span>CONSEIL PROJET</span><span>DEVIS SUR MESURE</span></div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- CHAPITRE 01 — REVÊTEMENT EXTÉRIEUR -->
+<div class="page divider-page" id="revetement">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">01 — REVÊTEMENT EXTÉRIEUR</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">01</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Revêtement extérieur</h2>
+    <div class="sub">Pavés et dalles pour composer des sols extérieurs durables, esthétiques et faciles à entretenir.</div>
+  </div>
+
+  <div class="divider-photo">
+    <img src="usine-cour-3.jpg" alt="Stock de revêtements en béton dans l'usine SOMATRAC">
+    <div class="divider-photo-label">SOMATRAC Matériaux — Fabrication à Agadir</div>
+  </div>
+
+  <div class="divider-copy">
+    <p>Cette famille regroupe l'ensemble de nos solutions de revêtement extérieur : les <b>pavés autobloquants</b>, pour composer des sols résistants en voirie, trottoirs et parkings, et les <b>dalles</b>, pour les terrasses, cours et aménagements paysagers.</p>
+    <p>Tous nos revêtements sont fabriqués en interne, dans plusieurs formats, teintes et finitions, pour s'adapter à la nature et à l'usage de votre projet.</p>
+    <div class="divider-sub-tags"><span class="divider-sub-tag">01.1 — PAVÉS</span><span class="divider-sub-tag">01.2 — DALLES</span></div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE 3 — UNIVERS PAVÉS (présentation) -->
+<div class="page" id="paves-intro">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">01 — PAVÉS AUTOBLOQUANTS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">01</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Une gamme de pavés pensée pour durer</h2>
+    <div class="sub">Esthétique, résistance et durabilité au service de vos aménagements extérieurs.</div>
+  </div>
+
+  <div class="paves-intro-layout">
+    <div class="paves-intro-copy">
+      <p>SOMATRAC Matériaux vous propose une large gamme de pavés en béton alliant esthétique, résistance et durabilité. Disponibles en plusieurs formes, épaisseurs, teintes et finitions, nos pavés s'adaptent aux voiries, trottoirs, parkings, places et aménagements extérieurs.</p>
+      <p>Conçus à partir de matières premières sélectionnées et d'un procédé de fabrication maîtrisé, ils offrent :</p>
+      <ul class="benefit-list">
+        <li>Résistance et longévité</li>
+        <li>Large choix de couleurs et finitions</li>
+        <li>Pose et entretien faciles</li>
+        <li>Possibilité de réutilisation</li>
+        <li>Adaptation aux différents styles d'aménagement</li>
+      </ul>
+    </div>
+    <div class="paves-intro-gallery">
+      <img src="Pavé Carré.jpeg" alt="Pavé carré SOMATRAC">
+      <img src="expedition-2.jpg" alt="Pavés SOMATRAC conditionnés et prêts à l'expédition">
+      <img src="meknes.jpeg" alt="Pavé Meknes SOMATRAC">
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:12mm;">
+    <h2 style="font-size:19px;">Domaines d'application</h2>
+  </div>
+  <div class="about-values" style="grid-template-columns:repeat(4,1fr); margin-top:6mm;">
+    <div class="value-item"><h3>Voiries</h3><p>Routes, ronds-points et zones de circulation.</p></div>
+    <div class="value-item"><h3>Trottoirs</h3><p>Cheminements piétons sûrs et durables.</p></div>
+    <div class="value-item"><h3>Parkings</h3><p>Zones de stationnement résistantes au trafic.</p></div>
+    <div class="value-item"><h3>Places &amp; espaces verts</h3><p>Aménagements paysagers et espaces publics.</p></div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE 4 — PAVÉS AUTOBLOQUANTS (1/2) -->
+<div class="page legacy-catalog-page" id="paves">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">01 — PAVÉS AUTOBLOQUANTS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">01</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Pavés autobloquants</h2>
+    <div class="sub">Des formes et coloris pour créer des sols durables, accueillants et faciles à entretenir.</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- PHOTO: pave-ondule-100x100 -->
+    <div class="card">
+      <div class="photo" data-shape="wave" data-dim="100 × 100 mm"><img src="Pavé Ondulé.jpeg" alt="Pavé ondulé gris"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body">
+        <div class="ref">RÉF. SMT-PV01</div>
+        <div class="name">Pavé Ondulé</div>
+        <div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé carré 20 par 20, 6 cm"><tbody>
+            <tr><th>Format</th><td>230 x 120 x 60</td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td>6 cm</td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14</td></tr>
+            <tr><th>m² / filet</th><td>0,85 m²</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 450</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO: pave-carre-22x22 -->
+    <div class="card">
+      <div class="photo" data-shape="square" data-dim="20 × 20 cm · 6 cm"><img src="Pavé Carré.jpeg" alt="Pavé carré 20 par 20, 6 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-catalog-order="3" data-compact-sheet="true" data-description="Le pavé carré 20/20 en épaisseur 6 cm offre un format régulier pour composer des aménagements extérieurs résistants et harmonieux.">
+        <div class="ref">RÉF. SMT-PV02</div>
+        <div class="name">Pavé Carré 20/20 — 6 cm</div>
+        <div class="specs">Format : <b>20 × 20 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé carré 20 par 20, 6 cm"><tbody>
+            <tr><th>Format</th><td>20 × 20 cm</td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td>6 cm</td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14</td></tr>
+            <tr><th>m² / filet</th><td>1,00 m²</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 960 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO: pave-double-t -->
+    <div class="card">
+      <div class="photo" data-shape="wave" data-dim="ép. 6 / 8 cm"><img src="Paves3.jpeg" alt="Pavé autobloquant zigzag"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body">
+        <div class="ref">RÉF. SMT-PV03</div>
+        <div class="name">Pavé 3 Piéces</div>
+        <div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé carré 20 par 20, 6 cm"><tbody>
+            <tr><th>Format</th><td>120 x 60 x 60 &amp; 120 x 120 x 60 &amp;180 x 120 x 60</td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td> ± ( 2 mm) </td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14</td></tr>
+            <tr><th>m² / filet</th><td>0,81 m²</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 500 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO: pave-blocs-serie -->
+    <div class="card">
+      <div class="photo" data-shape="rectangle" data-dim="10 × 20 cm"><img src="Pavé Brique.jpeg" alt="Pavé brique en série"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body">
+        <div class="ref">RÉF. SMT-PV04</div>
+        <div class="name">Pavé Brique &amp; blocs</div>
+        <div class="specs">Formats : <b>120×60×60 mm</b> — <b>120×120×60 mm</b> — <b>180×120×60 mm</b></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- PAGE 4 — PAVÉS AUTOBLOQUANTS (2/2) -->
+<div class="page legacy-catalog-page" id="paves-2">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">01 — PAVÉS AUTOBLOQUANTS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">01</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Pavés autobloquants <span style="font-size:15px;color:var(--charcoal);font-family:Inter,sans-serif;">(suite)</span></h2>
+  </div>
+
+  <div class="grid">
+
+    <!-- PHOTO: pave-vague -->
+    <div class="card">
+      <div class="photo" data-shape="wave" data-dim="ép. 6 / 8 cm"><img src="Pavé Vague.jpeg" alt="Pavé vague bicolore"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body">
+        <div class="ref">RÉF. SMT-PV05</div>
+        <div class="name">Pavé Vague</div>
+        <div class="specs">Épaisseur : <b>6 cm / 8 cm</b><br>Bicolore possible (bandeau + corps)</div>
+      </div>
+    </div>
+
+    <!-- PHOTO: pave-zigzag -->
+    <div class="card">
+      <div class="photo" data-shape="wave" data-dim="ép. 6 / 8 cm"><img src="meknes.jpeg" alt="Pavé zigzag autobloquant"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body">
+        <div class="ref">RÉF. SMT-PV06</div>
+        <div class="name">Pavé Meknes</div>
+        <div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé carré 20 par 20, 6 cm"><tbody>
+            <tr><th>Format</th><td>22.7 x 13.7 cm </td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td>6 cm</td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14</td></tr>
+            <tr><th>m² / filet</th><td>0,81 m²</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 420 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO: pave-brique-1020 -->
+    <div class="card">
+      <div class="photo" data-shape="rectangle" data-dim="20 × 10 cm · 6 / 8 cm"><img src="Pavé Brique.jpeg" alt="Pavé brique 10 par 20, 6 et 8 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-catalog-order="2" data-compact-sheet="true" data-description="Le pavé brique 10/20 est disponible en épaisseur 6 cm ou 8 cm. Sa finition double couche et ses coloris variés permettent de composer des aménagements durables.">
+        <div class="ref">RÉF. SMT-PV07</div>
+        <div class="name">Pavé Brique 10/20 — 6 &amp; 8 cm</div>
+        <div class="specs">Format : <b>20 × 10 cm</b><br>Épaisseurs : <b>6 cm / 8 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé brique 10 par 20, 6 et 8 cm"><tbody>
+            <tr><th>Format</th><td>20 × 10 cm</td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td>6 cm et 8 cm</td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14 (6 et 8 cm)</td></tr>
+            <tr><th>m² / filet</th><td>0,85 m² (6 et 8cm)</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 610 kg (6 cm) 1 690 KG (8cm)</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO: pave-hexagonal -->
+    <div class="card">
+      <div class="photo" data-shape="hexagon" data-dim="ép. 6 cm"><img src="Pavé Hexagonal.jpeg" alt="Pavé hexagonal gris"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body">
+        <div class="ref">RÉF. SMT-PV08</div>
+        <div class="name">Pavé Hexagonal</div>
+        <div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé carré 20 par 20, 6 cm"><tbody>
+            <tr><th>Format</th><td>240 x 120 x 60</td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td>± ( 3 mm)</td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14</td></tr>
+            <tr><th>m² / filet</th><td>0,81 m²</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 480 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- FICHE TECHNIQUE: pavé H 6 et H 8 -->
+    <div class="card">
+      <div class="photo" data-shape="h" data-dim="20 × 16 cm · 6 / 8 cm"><img src="H8.png" alt="Pavé autobloquant type H 6 et H 8"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-catalog-order="1" data-compact-sheet="true" data-description="Le pavé autobloquant type H est disponible en épaisseur 6 cm ou 8 cm, pour adapter la solution aux contraintes de votre projet et de son trafic.">
+        <div class="ref">RÉF. SMT-PV-H6 / H8</div>
+        <div class="name">Pavé Double T</div>
+        <div class="specs">Format : <b>20 × 16 cm</b><br>Épaisseurs : <b>6 cm / 8 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques des pavés type H 6 et H 8"><tbody>
+            <tr><th>Format</th><td>20 × 16 cm</td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td>6 cm et 8 cm</td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14 (6 cm) — 12 (8 cm)</td></tr>
+            <tr><th>m² / filet</th><td>0,86 m²</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 418 kg (6 cm) — ≈ 1 510 kg (8 cm)</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 6 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- SOUS-BANDEAU 01.2 — DALLES -->
+<div class="page divider-page" id="dalles-intro">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">01 — REVÊTEMENT EXTÉRIEUR — DALLES</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">01</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Dalles</h2>
+    <div class="sub">Des finitions minérales pour terrasses, cours, passages et espaces paysagers.</div>
+  </div>
+
+  <div class="divider-photo">
+    <img src="usine-cour-1.jpg" alt="Stock de produits béton dans l'usine SOMATRAC">
+    <div class="divider-photo-label">SOMATRAC Matériaux — Agadir</div>
+  </div>
+
+  <div class="divider-copy">
+    <p>Nos dalles habillent durablement vos espaces extérieurs : terrasses, cours, passages et aménagements paysagers, en finition brute ou teintée, en format régulier ou alvéolé pour le gazon.</p>
+    <p>Comme tous nos produits, elles sont fabriquées et stockées dans notre usine d'Agadir, prêtes à être livrées sur votre chantier.</p>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE — DALLES (données) -->
+<div class="page legacy-catalog-page print-compact" id="dalles">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">01 — DALLES</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">01</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Dalles</h2>
+    <div class="sub">Des finitions minérales pour les terrasses, cours, passages et espaces paysagers.</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- PHOTO: dalle-revsol -->
+    <div class="card">
+      <div class="photo" data-shape="slab" data-dim="500 × 500 × 60 mm"><img src="Revsol-prefab-1-2.png" alt="Dalle Type Revsol"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="La dalle Type Revsol est une solution béton pour les aménagements extérieurs, disponible en finition brute ou teintée.">
+        <div class="ref">RÉF. SMT-DL01</div>
+        <div class="name">Dalle Type Revsol</div>
+        <div class="specs">Dimensions : <b>500 × 500 × 60 mm</b><br>Finition : <b>brute ou teintée</b><br>Palette : <b>12 m²</b> — Poids unitaire : <b>30 kg</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la dalle Type Revsol"><tbody>
+            <tr><th>Dimensions (L × l × ép.)</th><td>500 × 500 × 60 mm</td></tr>
+            <tr><th>Longueur</th><td>500 mm ± 5 mm</td></tr>
+            <tr><th>Largeur</th><td>500 mm ± 5 mm</td></tr>
+            <tr><th>Épaisseur</th><td>60 mm ± 3 mm</td></tr>
+            <tr><th>Finition</th><td>Brute / teintée</td></tr>
+            <tr><th>Contenance palette</th><td>12 m²</td></tr>
+            <tr><th>Poids / unité</th><td>30 kg</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO: pave-gazon -->
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="32 × 48 cm"><img src="image-removebg-preview (8).png" alt="Pavé gazon alvéolé"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body">
+        <div class="ref">RÉF. SMT-DL02</div>
+        <div class="name">Pavé Gazon (alvéolé)</div>
+        <div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé carré 20 par 20, 6 cm"><tbody>
+            <tr><th>Format</th><td>43 x 43 cm </td></tr>
+            <tr><th>Chanfrein</th><td>Oui</td></tr>
+            <tr><th>Épaisseur</th><td>8 cm</td></tr>
+            <tr><th>Couleur</th><td>Divers</td></tr>
+            <tr><th>Finition</th><td>Double couche</td></tr>
+            <tr><th>Nombre de filets</th><td>14</td></tr>
+            <tr><th>m² / filet</th><td>0,81 m²</td></tr>
+            <tr><th>Poids / palette</th><td>≈ 1 600 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- DIVISION 02 — BORDURES -->
+<div class="page divider-page" id="bordures-intro">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">02 — BORDURES DE TROTTOIR</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">02</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Bordures</h2>
+    <div class="sub">Des profils pour organiser, protéger et structurer vos voiries et espaces extérieurs.</div>
+  </div>
+
+  <div class="divider-photo">
+    <img src="expedition-1.jpg" alt="Palettes de produits SOMATRAC prêtes à l'expédition">
+    <div class="divider-photo-label">SOMATRAC Matériaux — Expédition chantier</div>
+  </div>
+
+  <div class="divider-copy">
+    <p>Notre gamme de bordures (P1, CR1, séries T, bordures américaines I1/I2, F1) délimite proprement voiries, trottoirs et espaces verts, avec une finition nette et durable.</p>
+    <p>Disponibles en plusieurs longueurs et profils, elles s'adaptent aux contraintes de chaque chantier.</p>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE — BORDURES DE TROTTOIR (données) -->
+<div class="page legacy-catalog-page print-compact edging-page" id="edging">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">02 — BORDURES DE TROTTOIR</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">02</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Bordures de trottoir</h2>
+    <div class="sub">Des profils adaptés pour organiser, protéger et donner une finition nette à vos espaces.</div>
+  </div>
+
+  <div class="grid">
+    <!-- FICHE TECHNIQUE: bordure P1 -->
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="longueur 1 m"><img src="bordure_T1.png" alt="Bordure P1 en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-compact-sheet="true" data-description="La bordure P1 est un élément préfabriqué en béton destiné à la délimitation durable des voiries et des aménagements extérieurs.">
+        <div class="ref">RÉF. P1</div>
+        <div class="name">Bordure P1</div>
+        <div class="specs">Longueur : <b>1 ml</b><br>Poids unitaire : <b>≈ 39 kg</b><br>Conditionnement : <b>36 pièces / palette</b><br>Résistance moyenne : <b>B1 7,3 MPa — B2 5,7 MPa</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la bordure P1"><tbody>
+            <tr><th>Désignation</th><td>P1</td></tr>
+            <tr><th>Longueur</th><td>1 ml</td></tr>
+            <tr><th>Tolérances dimensionnelles</th><td>± 1 cm</td></tr>
+            <tr><th>Poids par pièce</th><td>≈ 39 kg</td></tr>
+            <tr><th>Nombre de pièces / palette</th><td>36</td></tr>
+            <tr><th>Poids par palette</th><td>≈ 1 400 kg</td></tr>
+            <tr><th>Résistance moyenne — Classe B1</th><td>7,3 MPa</td></tr>
+            <tr><th>Résistance moyenne — Classe B2</th><td>5,7 MPa</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- FICHE TECHNIQUE: bordure CR1 -->
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="longueur 1 m"><img src="bordure_T1.png" alt="Bordure CR1 en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-compact-sheet="true" data-description="La bordure CR1 est un élément préfabriqué en béton destiné à la délimitation durable des voiries et des aménagements extérieurs.">
+        <div class="ref">RÉF. CR1</div>
+        <div class="name">Bordure CR1</div>
+        <div class="specs">Longueur : <b>1 ml</b><br>Poids unitaire : <b>≈ 39 kg</b><br>Conditionnement : <b>36 pièces / palette</b><br>Résistance moyenne : <b>B1 7,3 MPa — B2 5,7 MPa</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la bordure CR1"><tbody>
+            <tr><th>Désignation</th><td>CR1</td></tr>
+            <tr><th>Longueur</th><td>1 ml</td></tr>
+            <tr><th>Tolérances dimensionnelles</th><td>± 1 cm</td></tr>
+            <tr><th>Poids par pièce</th><td>≈ 39 kg</td></tr>
+            <tr><th>Nombre de pièces / palette</th><td>36</td></tr>
+            <tr><th>Poids par palette</th><td>≈ 1 400 kg</td></tr>
+            <tr><th>Résistance moyenne — Classe B1</th><td>7,3 MPa</td></tr>
+            <tr><th>Résistance moyenne — Classe B2</th><td>5,7 MPa</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="dimensions sur demande"><img src="bordure_T1.png" alt="Bordure de trottoir T1"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. T1</div><div class="name">Bordure T1</div>
+<div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques du pavé carré 20 par 20, 6 cm"><tbody>
+            <tr><th>Format</th><td>100 x 12 x 20</td></tr>
+            <tr><th>nombre de piéce /palettes </th><td>20</td></tr>
+            <tr><th>Poids unitaire </th><td>≈ 50 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Poids /pallette</th><td> 1 150 kg</td></tr>
+            <tr><th>Tolérance longueur &amp; largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>&lt; 23 mm</td></tr>
+          </tbody></table>
+        </div></div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="dimensions sur demande"><img src="borduret2.png" alt="Bordure de trottoir T2"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. T2</div><div class="name">Bordure T2</div>
+<div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la bordure T2"><tbody>
+            <tr><th>Format</th><td>100 x 15 x 25</td></tr>
+            <tr><th>nombre de piéce /palettes </th><td>16</td></tr>
+            <tr><th>Poids unitaire </th><td>≈ 80 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Poids /pallette</th><td> 1 280 kg</td></tr>
+            <tr><th>Tolérance longueur & largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>< 23 mm</td></tr>
+          </tbody></table>
+        </div></div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="dimensions sur demande"><img src="bordure_T3.png" alt="Bordure de trottoir T3"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. T3</div><div class="name">Bordure T3</div>
+<div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la bordure T3"><tbody>
+            <tr><th>Format</th><td>00 x 17 x 28</td></tr>
+            <tr><th>nombre de piéce /palettes </th><td>16</td></tr>
+            <tr><th>Poids unitaire </th><td>≈ 100 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Poids /pallette</th><td> 1 600 kg</td></tr>
+            <tr><th>Tolérance longueur & largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>< 23 mm</td></tr>
+          </tbody></table>
+        </div></div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="100 × 20 × 30 cm"><img src="bordure_T4.png" alt="Bordure de trottoir T4"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. T4</div><div class="name">Bordure T4</div>
+<div class="specs">Format : <b>22.5 × 22.5 cm</b><br>Épaisseur : <b>6 cm</b><br>Finition : <b>double couche</b> — Couleurs : <b>diverses</b><br>Norme : <b>EN 1338</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la bordure T4"><tbody>
+            <tr><th>Format</th><td>100 x 20 x 30</td></tr>
+            <tr><th>nombre de piéce /palettes </th><td>12</td></tr>
+            <tr><th>Poids unitaire </th><td>≈ 130 kg</td></tr>
+            <tr><th>Norme applicable</th><td>EN 1338</td></tr>
+            <tr><th>Poids /pallette</th><td> 1 560 kg</td></tr>
+            <tr><th>Tolérance longueur & largeur</th><td>± 2 mm</td></tr>
+            <tr><th>Tolérance épaisseur</th><td>± 3 mm</td></tr>
+            <tr><th>Absorption d'eau moyenne</th><td>≤ 9 %</td></tr>
+            <tr><th>Résistance à la rupture par fendage (moyenne)</th><td>≥ 3,6 MPa</td></tr>
+            <tr><th>Résistance à l'abrasion</th><td>< 23 mm</td></tr>
+          </tbody></table>
+        </div></div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="60 × 25 × 18 cm"><img src="bordureamericane.jpeg" alt="Bordure américaine en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. I1</div><div class="name">Bordure Américaine I1</div>
+<div class="specs">Profil adapté aux bordures de voirie et aux séparations d'aménagement.<br>Longueur : <b>60 cm</b> — Largeur : <b>25 cm</b> — Hauteur : <b>18 cm</b><br>Couleurs : <b>Béton naturel</b> — Norme : <b>NM 10-1-014</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la bordure américaine I1"><tbody>
+            <tr><th>Longueur</th><td>60 cm</td></tr>
+            <tr><th>Largeur</th><td>25 cm</td></tr>
+            <tr><th>Hauteur</th><td>18 cm</td></tr>
+            <tr><th>Poids</th><td>75 kg</td></tr>
+            <tr><th>Couleurs</th><td>Béton naturel</td></tr>
+            <tr><th>Norme applicable</th><td>NM 10-1-014</td></tr>
+          </tbody></table>
+        </div></div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="60 × 30 × 22 cm"><img src="bordureamericane.jpeg" alt="Bordure américaine en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. I2</div><div class="name">Bordure Américaine I2</div>
+<div class="specs">Profil adapté aux bordures de voirie et aux séparations d'aménagement.<br>Longueur : <b>60 cm</b> — Largeur : <b>30 cm</b> — Hauteur : <b>22 cm</b><br>Couleurs : <b>Béton naturel</b> — Norme : <b>NM 10-1-014</b></div>
+        <div class="technical-details">
+          <table aria-label="Caractéristiques techniques de la bordure américaine I2"><tbody>
+            <tr><th>Longueur</th><td>60 cm</td></tr>
+            <tr><th>Largeur</th><td>30 cm</td></tr>
+            <tr><th>Hauteur</th><td>22 cm</td></tr>
+            <tr><th>Poids</th><td>81 kg</td></tr>
+            <tr><th>Couleurs</th><td>Béton naturel</td></tr>
+            <tr><th>Norme applicable</th><td>NM 10-1-014</td></tr>
+          </tbody></table>
+        </div></div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="border" data-dim="dimensions sur demande"><img src="F1.jpeg" alt="Bordure F1 en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. F1</div><div class="name">Bordure F1</div><div class="specs">Élément de finition pour voiries et espaces extérieurs.<br>Format et disponibilité : <b>sur demande</b></div></div>
+    </div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- DIVISION 03 — CANIVEAUX -->
+<div class="page divider-page" id="caniveaux-intro">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">03 — CANIVEAUX</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">03</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Caniveaux</h2>
+    <div class="sub">Des éléments de collecte et d'évacuation des eaux pluviales.</div>
+  </div>
+
+  <div class="divider-photo">
+    <img src="usine-vue-aerienne.jpg" alt="Vue du site de production SOMATRAC">
+    <div class="divider-photo-label">SOMATRAC Matériaux — Site de production</div>
+  </div>
+
+  <div class="divider-copy">
+    <p>Nos caniveaux (simple pente, double pente, séries CC et CS) assurent la collecte et l'évacuation des eaux pluviales dans les voiries, cours et aménagements extérieurs.</p>
+    <p>Le format et l'adaptation au chantier sont étudiés selon les besoins de votre projet.</p>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE — CANIVEAUX (données) -->
+<div class="page legacy-catalog-page" id="caniveaux">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">03 — CANIVEAUX</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">03</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Caniveaux</h2>
+    <div class="sub">Éléments de collecte et d'évacuation des eaux pluviales pour voiries, cours et aménagements extérieurs.</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="photo" data-shape="channel" data-dim="dimensions sur demande"><img src="simplepente.jpeg" alt="Caniveau simple pente"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. SMT-CV01</div><div class="name">Caniveau simple pente</div><div class="specs">Profil pour guider les eaux vers le point d'évacuation.<br>Format et adaptation au chantier : <b>sur demande</b></div></div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="channel" data-dim="dimensions sur demande"><img src="doublepentecc.jpeg" alt="Caniveau double pente"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. SMT-CV02</div><div class="name">Caniveau double pente</div><div class="specs">Profil central pour la collecte des eaux pluviales sur deux versants.<br>Format et adaptation au chantier : <b>sur demande</b></div></div>
+    </div>
+
+    <div class="card">
+      <div class="photo" data-shape="channel" data-dim="100 × 40 × 12 cm"><img src="simplepente.jpeg" alt="Caniveau CC1"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="Le caniveau CC1 facilite la collecte et l'évacuation des eaux pluviales dans les voiries et aménagements extérieurs.">
+        <div class="ref">RÉF. CC1</div><div class="name">Caniveau CC1</div>
+        <div class="specs">Dimensions : <b>100 × 40 × 12 cm</b><br>Poids : <b>110 kg</b> — Couleurs : <b>divers</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques du caniveau CC1"><tbody>
+          <tr><th>Longueur</th><td>100 cm</td></tr><tr><th>Largeur</th><td>40 cm</td></tr><tr><th>Hauteur</th><td>12 cm</td></tr><tr><th>Poids</th><td>110 kg</td></tr><tr><th>Couleurs</th><td>Divers</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo" data-shape="channel" data-dim="100 × 50 × 14 cm"><img src="doublepentecc.jpeg" alt="Caniveau CC2"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="Le caniveau CC2 est une solution de collecte des eaux pluviales pour les voiries et aménagements extérieurs.">
+        <div class="ref">RÉF. CC2</div><div class="name">Caniveau CC2</div>
+        <div class="specs">Dimensions : <b>100 × 50 × 14 cm</b><br>Poids : <b>140 kg</b> — Couleurs : <b>divers</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques du caniveau CC2"><tbody>
+          <tr><th>Longueur</th><td>100 cm</td></tr><tr><th>Largeur</th><td>50 cm</td></tr><tr><th>Hauteur</th><td>14 cm</td></tr><tr><th>Poids</th><td>140 kg</td></tr><tr><th>Couleurs</th><td>Divers</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo" data-shape="channel" data-dim="100 × 20 × 12 cm"><img src="simplepente.jpeg" alt="Caniveau CS1"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="Le caniveau CS1 facilite la collecte et l'évacuation des eaux pluviales dans les aménagements extérieurs.">
+        <div class="ref">RÉF. CS1</div><div class="name">Caniveau CS1</div>
+        <div class="specs">Dimensions : <b>100 × 20 × 12 cm</b><br>Poids : <b>55 kg</b> — Couleurs : <b>divers</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques du caniveau CS1"><tbody>
+          <tr><th>Longueur</th><td>100 cm</td></tr><tr><th>Largeur</th><td>20 cm</td></tr><tr><th>Hauteur</th><td>12 cm</td></tr><tr><th>Poids</th><td>55 kg</td></tr><tr><th>Couleurs</th><td>Divers</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo" data-shape="channel" data-dim="100 × 25 × 16,5 cm"><img src="doublepentecc.jpeg" alt="Caniveau CS3"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="Le caniveau CS3 assure la collecte et l'évacuation des eaux pluviales dans les voiries et aménagements extérieurs.">
+        <div class="ref">RÉF. CS3</div><div class="name">Caniveau CS3</div>
+        <div class="specs">Dimensions : <b>100 × 25 × 16,5 cm</b><br>Poids : <b>70 kg</b> — Couleurs : <b>divers</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques du caniveau CS3"><tbody>
+          <tr><th>Longueur</th><td>100 cm</td></tr><tr><th>Largeur</th><td>25 cm</td></tr><tr><th>Hauteur</th><td>16,5 cm</td></tr><tr><th>Poids</th><td>70 kg</td></tr><tr><th>Couleurs</th><td>Divers</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- DIVISION 04 — AGGLOS -->
+<div class="page divider-page" id="agglos-intro">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">04 — AGGLOS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">04</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Agglos</h2>
+    <div class="sub">Des blocs béton pour murs, cloisons et ouvrages de maçonnerie.</div>
+  </div>
+
+  <div class="divider-photo">
+    <img src="usine-cour-4.jpg" alt="Stock de blocs béton SOMATRAC">
+    <div class="divider-photo-label">SOMATRAC Matériaux — Stock disponible</div>
+  </div>
+
+  <div class="divider-copy">
+    <p>Nos blocs béton creux accompagnent vos travaux de maçonnerie : murs, cloisons et ouvrages de construction.</p>
+    <p>Formats et quantités disponibles selon votre projet — notre équipe vous conseille sur le choix adapté.</p>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE — AGGLOS (données) -->
+<div class="page legacy-catalog-page" id="agglos">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">04 — AGGLOS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">04</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Agglos</h2>
+    <div class="sub">Des blocs béton pour murs, cloisons et ouvrages de maçonnerie.</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="format sur demande"><img src="agglos.jpeg" alt="Agglo creux en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. SMT-AG01</div><div class="name">Bloc béton creux</div><div class="specs">Bloc béton pour murs, cloisons et ouvrages de maçonnerie.<br>Format et disponibilité : <b>selon votre projet</b></div></div>
+    </div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- DIVISION 05 — HOURDIS -->
+<div class="page divider-page" id="hourdis-intro">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">05 — HOURDIS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">05</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Hourdis</h2>
+    <div class="sub">Des éléments de remplissage pour planchers poutrelles-hourdis.</div>
+  </div>
+
+  <div class="divider-photo">
+    <img src="usine-cour-2.jpg" alt="Unité de production SOMATRAC">
+    <div class="divider-photo-label">SOMATRAC Matériaux — Fabrication béton</div>
+  </div>
+
+  <div class="divider-copy">
+    <p>L'hourdis béton SOMATRAC est conçu pour les planchers poutrelles-hourdis, avec une résistance mécanique certifiée à 2 et 28 jours.</p>
+    <p>Un élément essentiel pour structurer vos ouvrages de construction en toute confiance.</p>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE — HOURDIS (données) -->
+<div class="page legacy-catalog-page" id="hourdis">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">05 — HOURDIS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">05</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Hourdis</h2>
+    <div class="sub">Élément essentiel pour construire et structurer vos ouvrages.</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="20 × 20 × 52 cm"><img src="houdris.jpeg" alt="Hourdis béton pour plancher"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'hourdis béton est un élément de remplissage destiné aux planchers poutrelles-hourdis.">
+        <div class="ref">RÉF. SMT-HO01</div><div class="name">Hourdis béton</div>
+        <div class="specs">Dimensions : <b>20 × 20 × 52 cm</b><br>Poids unitaire : <b>17,945 kg ± 5 %</b><br>Résistance à 28 jours : <b>moyenne ≥ 220 daN</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'hourdis béton"><tbody>
+          <tr><th>Dimensions de l'hourdis</th><td>20 × 20 × 52 cm</td></tr>
+          <tr><th>Longueur</th><td>20 cm ± 5 mm</td></tr>
+          <tr><th>Largeur</th><td>52 cm ± 3 mm</td></tr>
+          <tr><th>Hauteur</th><td>20 cm ± 3 mm</td></tr>
+          <tr><th>Largeur feuillure</th><td>2 cm ± 2 mm</td></tr>
+          <tr><th>Poids unitaire</th><td>17,945 kg ± 5 %</td></tr>
+          <tr><th>Nombre / palette</th><td>80</td></tr>
+          <tr><th>Porosité</th><td>&lt; 18 % du poids sec</td></tr>
+          <tr><th>Résistance mécanique à 2 jours</th><td>Moyenne ≥ 132 daN</td></tr>
+          <tr><th>Résistance mécanique à 28 jours</th><td>Moyenne ≥ 220 daN</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- DIVISION 06 — POUTRELLES -->
+<div class="page divider-page" id="poutrelles-intro">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">06 — POUTRELLES</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">06</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Poutrelles</h2>
+    <div class="sub">Des éléments préfabriqués pour vos planchers en béton.</div>
+  </div>
+
+  <div class="divider-photo">
+    <img src="poutrelle-detail.jpg" alt="Détail d'une poutrelle béton précontrainte SOMATRAC">
+    <div class="divider-photo-label">SOMATRAC Matériaux — Poutrelle précontrainte</div>
+  </div>
+
+  <div class="divider-copy">
+    <p>Nos poutrelles béton préfabriquées simplifient la construction de vos planchers, avec un choix de modèle et de portée adapté à chaque projet.</p>
+    <p>Fabriquées en interne, elles répondent aux exigences de résistance de vos chantiers.</p>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE — POUTRELLES (données) -->
+<div class="page legacy-catalog-page" id="poutrelles">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">06 — POUTRELLES</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">06</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Poutrelles</h2>
+    <div class="sub">Des éléments préfabriqués pour vos planchers en béton.</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="photo" data-shape="beam" data-dim="selon votre projet"><img src="poutrelle.jpeg" alt="Poutrelle béton préfabriquée"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body"><div class="ref">RÉF. SMT-PO01</div><div class="name">Poutrelle béton</div><div class="specs">Solution préfabriquée pour vos planchers en béton.<br>Choix du modèle et de la portée : <b>selon votre projet</b></div></div>
+    </div>
+  </div>
+
+  <div class="running-foot">
+    <span>SOMATRAC Matériaux — Catalogue Produits</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- PAGE 8 — SERVICES & DEVIS -->
+<div class="page" id="services">
+  <div class="running-head">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <div class="section-tag">05 — SERVICES &amp; DEVIS</div>
+  </div>
+
+  <div class="eyebrow-line"><span class="num">05</span><span class="rule"></span></div>
+  <div class="section-title">
+    <h2>Un partenaire pour vos chantiers</h2>
+    <div class="sub">Des produits adaptés, une réponse claire et un accompagnement commercial de proximité.</div>
+  </div>
+
+  <div class="service-grid">
+    <div class="service-item"><h3>Choix du produit</h3><p>Nous vous orientons vers la forme, l'épaisseur et la solution béton adaptées à votre usage : piéton, résidentiel, voirie ou construction.</p></div>
+    <div class="service-item"><h3>Conseil projet</h3><p>Pour les hourdis, poutrelles et éléments de construction, nous vous aidons à identifier la solution adaptée à votre chantier.</p></div>
+    <div class="service-item"><h3>Devis personnalisé</h3><p>Recevez une proposition adaptée aux références, quantités, finitions, conditionnement et contraintes de votre chantier.</p></div>
+    <div class="service-item"><h3>Disponibilité &amp; livraison</h3><p>Les délais et possibilités de livraison sont étudiés selon la quantité, la destination et le planning du chantier.</p></div>
+  </div>
+
+  <div class="intro-block" style="margin-top:14mm;">
+    <p><b>Pour demander un devis, préparez :</b> la référence du produit, les dimensions souhaitées, la quantité, la commune de livraison et la date prévue du chantier.</p>
+    <p>Notre équipe peut également vous aider à identifier la solution la plus adaptée à votre projet.</p>
+  </div>
+
+  <div class="cta-panel">
+    <div><div class="cta-label">PROCHAINE ÉTAPE</div><h3>Parlons de votre projet béton.</h3></div>
+    <p>Contactez SOMATRAC Matériaux pour vérifier la disponibilité et recevoir votre offre commerciale.</p>
+  </div>
+
+  <div class="running-foot"><span>SOMATRAC Matériaux — Catalogue Produits</span><span>8</span></div>
+</div>
+
+<!-- PAGE 9 — BACK / CONTACT -->
+<div class="page back">
+  <div class="back-top">
+    <div class="cover-logo"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div>
+    <h2>Parlons de votre prochain projet d'aménagement.</h2>
+  </div>
+  <div class="back-contact">
+    <div><div class="label">TÉLÉPHONE / WHATSAPP</div><div class="val">05 28 28 41 47<br>06 62 32 25 40 — 06 66 83 37 30</div></div>
+    <div><div class="label">E-MAIL</div><div class="val">somatracmateriaux@gmail.com</div></div>
+    <div><div class="label">SIÈGE</div><div class="val">3, Imm. Jamal, Rue Hôtel de Ville — Agadir</div></div>
+    <div><div class="label">USINE</div><div class="val">Route de Taroudant vers Amskeoud<br>Douar Aït Hassassa — Commune rurale Issen</div></div>
+  </div>
+  <div class="back-strip"></div>
+</div>
+
+<script>
+  var navButtons = document.querySelectorAll('.screen-nav button[data-target]');
+  navButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var target = document.getElementById(button.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      navButtons.forEach(function(item) { item.classList.toggle('active', item === button); });
+    });
+  });
+
+  var navSections = ['catalogue-top', 'about', 'services'].map(function(id) { return document.getElementById(id); }).filter(Boolean);
+
+  function categoryTarget(text) {
+    if (/pavé/i.test(text)) return 'paves';
+    if (/dalle/i.test(text)) return 'dalles';
+    if (/bordure/i.test(text)) return 'edging';
+    if (/caniveau/i.test(text)) return 'caniveaux';
+    if (/agglo/i.test(text)) return 'agglos';
+    if (/hourdis/i.test(text)) return 'hourdis';
+    if (/poutrelle/i.test(text)) return 'poutrelles';
+    return '';
+  }
+  if ('IntersectionObserver' in window) {
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        navButtons.forEach(function(button) { button.classList.toggle('active', button.dataset.target === entry.target.id); });
+      });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    navSections.forEach(function(section) { sectionObserver.observe(section); });
+  }
+
+  var productCards = Array.from(document.querySelectorAll('.legacy-catalog-page .card')).sort(function(a, b) {
+    var aOrder = Number(a.querySelector('.body')?.dataset.catalogOrder) || 100;
+    var bOrder = Number(b.querySelector('.body')?.dataset.catalogOrder) || 100;
+    return aOrder - bOrder;
+  });
+  var servicesPage = document.getElementById('services');
+  var productFragment = document.createDocumentFragment();
+  var categoryIds = {};
+
+  productCards.forEach(function(card, index) {
+    var sourcePage = card.closest('.legacy-catalog-page');
+    var category = sourcePage.querySelector('h2')?.textContent.trim().replace(' (suite)', '') || 'Produits béton';
+    var family = category.split('&')[0].trim();
+    var photo = card.querySelector('.photo');
+    var image = photo.querySelector('img');
+    var body = card.querySelector('.body');
+    var ref = body.querySelector('.ref')?.textContent.trim().replace('RÉF. ', '') || 'SUR DEMANDE';
+    var name = body.querySelector('.name')?.textContent.trim() || 'Produit béton';
+    var specs = body.querySelector('.specs')?.innerHTML || '';
+    var technicalDetails = body.querySelector('.technical-details')?.innerHTML || '';
+    var description = 'Une solution SOMATRAC conçue pour accompagner vos projets de construction, de voirie et d’aménagement extérieur.';
+    if (/pavé/i.test(category)) description = 'Un pavé durable et esthétique pour composer des sols harmonieux, résistants et faciles à entretenir.';
+    if (/dalle/i.test(category)) description = 'Une solution pratique pour structurer vos espaces extérieurs et répondre aux besoins de votre chantier.';
+    if (/bordure/i.test(category)) description = 'Une finition nette et durable pour délimiter vos voiries, trottoirs, espaces verts et aménagements.';
+    if (/caniveau/i.test(category)) description = 'Une solution pratique pour la collecte et l’évacuation des eaux pluviales de votre chantier.';
+    if (/agglo|hourdis|poutrelle/i.test(category)) description = 'Un élément préfabriqué en béton pour construire plus simplement et avancer avec confiance sur votre chantier.';
+    if (body.dataset.description) description = body.dataset.description;
+
+    var sheet = document.createElement('div');
+    sheet.className = 'page product-sheet';
+    var rowCount = technicalDetails ? (technicalDetails.match(/<tr/g) || []).length : 0;
+    var isDense = rowCount >= 9 || body.dataset.compactSheet === 'true';
+    if (isDense) sheet.classList.add('compact-product-sheet');
+    if (!categoryIds[category]) {
+      categoryIds[category] = 'catalogue-' + (index + 1);
+      sheet.id = categoryIds[category];
+    }
+    sheet.setAttribute('data-family', category);
+    var dimText = photo.dataset.dim || '';
+    var formatBlock = dimText ? '<div class="sheet-format"><span>FORMAT</span><b>' + dimText + '</b></div>' : '';
+    var heroHeight = isDense ? null : technicalDetails ? 108 : 138;
+    var heroStyle = heroHeight ? ' style="height:' + heroHeight + 'mm"' : '';
+    sheet.innerHTML = '<div class="running-head"><div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div><div class="section-tag">CATALOGUE COMMERCIAL</div></div>' +
+      '<div class="sheet-kicker">NOS PRODUITS</div><div class="sheet-family">' + family + '</div><div class="sheet-rule"></div>' +
+      '<div class="sheet-hero"' + heroStyle + '><div class="sheet-image"><img src="' + image.getAttribute('src') + '" alt="' + image.alt + '"></div><div class="sheet-side"><div class="sheet-ref"><span>RÉFÉRENCE</span>' + ref + '</div>' + formatBlock + '</div></div>' +
+      '<div class="sheet-lower"><div class="sheet-info"><h3>Informations produit</h3><p><b>Produit :</b> ' + name + '</p>' + (technicalDetails ? '<div class="technical-details">' + technicalDetails + '</div>' : '<p>' + specs + '</p>') + '<p><b>Disponibilité :</b> selon projet et stock</p></div><div class="sheet-copy"><h3>' + name + '</h3><p>' + description + '</p><p>Disponible en plusieurs formats ou finitions selon les besoins du chantier.</p><div class="sheet-callout">CONTACTEZ-NOUS POUR VOTRE DEVIS</div></div></div><div class="running-foot"><span>SOMATRAC Matériaux — Catalogue Commercial</span><span></span></div>';
+    productFragment.appendChild(sheet);
+  });
+
+  if (servicesPage) servicesPage.parentNode.insertBefore(productFragment, servicesPage);
+  Object.keys(categoryIds).forEach(function(category) {
+    var targetId = categoryIds[category];
+    var buttonTarget = categoryTarget(category);
+    if (!buttonTarget) return;
+    document.querySelectorAll('[data-target="' + buttonTarget + '"]').forEach(function(item) { item.dataset.target = targetId; });
+    document.querySelectorAll('a[href="#' + buttonTarget + '"]').forEach(function(item) { item.setAttribute('href', '#' + targetId); });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var generatedSections = Object.keys(categoryIds).map(function(category) { return document.getElementById(categoryIds[category]); }).filter(Boolean);
+    var generatedObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var family = entry.target.dataset.family || '';
+        var target = categoryTarget(family);
+        navButtons.forEach(function(button) { button.classList.toggle('active', button.dataset.target === target || button.dataset.target === entry.target.id); });
+      });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    generatedSections.forEach(function(section) { generatedObserver.observe(section); });
+  }
+
+  document.querySelectorAll('.page:not(.legacy-catalog-page)').forEach(function(pageEl, i) {
+    var pageNum = pageEl.querySelector('.running-foot span:last-child');
+    if (pageNum) pageNum.textContent = i + 1;
+  });
+</script>
+
+</body>
+</html>

@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>SOMATRAC Matériaux — Catalogue Commercial</title>
-<script>tailwind.config = { corePlugins: { preflight: false } };</script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
   :root{
-    --orange: #E15A28;
-    --orange-dark: #B9431A;
-    --charcoal: #4A4A4C;
-    --near-black: #262524;
+    /* Couleurs reprises du logo SOMATRAC : orange, noir, beige pavé. */
+    --orange: #EF6B1F;
+    --orange-dark: #B84A0E;
+    --orange-deep: #8C3707;
+    --charcoal: #57565A;
+    --near-black: #17161A;
+    --sand: #C9BCA8;
     --concrete: #C9C6C0;
     --concrete-light: #E4E1DA;
-    --paper: #F6F5F2;
-    --line: #d8d5cd;
-    --orange-soft: #fff0e8;
-    --shadow: 0 18px 45px rgba(38,37,36,.12);
+    --paper: #F7F6F3;
+    --line: #dcd8d0;
+    --orange-soft: #FFF2E9;
+    --shadow: 0 18px 45px rgba(23,22,26,.13);
   }
-§//
   *{ box-sizing:border-box; }
 
   @page{
@@ -29,10 +32,13 @@
 
   html,body{
     margin:0; padding:0;
-    background:#78766f;
+    background:#6f6d68;
     font-family:"Inter","Segoe UI","Helvetica Neue",Arial,sans-serif;
     color:var(--near-black);
     scroll-behavior:smooth;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"kern" 1,"liga" 1,"tnum" 1;
   }
 
   .page{
@@ -122,37 +128,89 @@
     font-size:9.5px; color:var(--charcoal); border-top:1px solid var(--line); padding-top:6px;
   }
 
-  .cover-modern{ padding:0; overflow:hidden; background:#fff; color:#1f2937; display:flex; flex-direction:column; }
-  .cover-modern .cover-header{ min-height:65mm; padding:12mm 14mm 10mm; position:relative; overflow:hidden; background:linear-gradient(125deg,#102b65 0%,#1e3a8a 62%,#10204b 100%); }
-  .cover-modern .cover-header::after{ content:""; position:absolute; right:-21mm; bottom:-28mm; width:94mm; height:80mm; transform:rotate(-24deg); background:rgba(217,119,6,.96); clip-path:polygon(48% 0,100% 0,100% 100%,0 100%); }
-  .cover-modern .cover-header::before{ content:""; position:absolute; right:24mm; bottom:-25mm; z-index:1; width:4mm; height:85mm; transform:rotate(37deg); background:#fff; opacity:.9; }
-  .cover-modern .cover-brand{ position:relative; z-index:2; display:flex; align-items:center; }
-  .cover-modern .cover-brand-logo{ width:62mm; max-height:39mm; object-fit:contain; padding:2.5mm 4mm; background:#fff; box-shadow:5px 5px 0 rgba(217,119,6,.48); }
-  .cover-modern .cover-tagline{ position:relative; z-index:2; margin:4mm 0 0; color:#dce5f6; font:600 9px/1.4 Arial,sans-serif; letter-spacing:.22em; }
-  .cover-modern .cover-hero{ height:106mm; position:relative; overflow:hidden; background:#182849; }
-  .cover-modern .cover-hero img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block; filter:saturate(.82) contrast(1.05); }
-  .cover-modern .cover-hero::before{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(110deg,rgba(15,34,78,.77) 0%,rgba(15,34,78,.22) 48%,rgba(0,0,0,.04) 100%); }
-  .cover-modern .cover-hero::after{ content:""; position:absolute; z-index:2; left:-18mm; bottom:-30mm; width:110mm; height:75mm; background:#d97706; opacity:.95; transform:rotate(-22deg); clip-path:polygon(0 0,100% 0,72% 100%,0 100%); }
-  .cover-modern .cover-hero-label{ position:absolute; z-index:3; left:14mm; bottom:14mm; width:64mm; color:#fff; font:700 10px/1.45 Arial,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
-  .cover-modern .cover-title-band{ min-height:60mm; padding:10mm 14mm 8mm; background:#132e67; position:relative; overflow:hidden; flex:1; display:flex; flex-direction:column; justify-content:center; }
-  .cover-modern .cover-title-band::after{ content:""; position:absolute; top:0; right:0; width:48mm; height:100%; background:#d97706; clip-path:polygon(62% 0,100% 0,100% 100%,0 100%); }
-  .cover-modern .cover-title{ position:relative; z-index:1; color:#fff; font:800 30px/.98 Arial,sans-serif; letter-spacing:.025em; }
-  .cover-modern .cover-activities{ position:relative; z-index:1; margin-top:5mm; padding-top:4mm; border-top:1px solid rgba(255,255,255,.38); color:#fbbf24; font:700 8.5px/1.45 Arial,sans-serif; letter-spacing:.09em; }
-  .cover-modern .cover-footer{ margin-top:auto; min-height:47mm; padding:0; position:relative; overflow:hidden; background:linear-gradient(125deg,#102b65 0%,#1e3a8a 62%,#10204b 100%); border-top:1.5mm solid #d97706; }
-  .cover-modern .cover-footer::after{ content:""; position:absolute; right:-18mm; bottom:-30mm; width:100mm; height:72mm; transform:rotate(-22deg); background:#d97706; clip-path:polygon(46% 0,100% 0,100% 100%,0 100%); }
+  /* ---- COUVERTURE (charte logo : orange / noir / beige pavé) ---- */
+  .cover-modern{ padding:0; overflow:hidden; background:var(--near-black); color:#fff; display:flex; flex-direction:column; }
+
+  .cover-modern .cover-header{
+    flex:0 0 46mm; padding:11mm 14mm 0; position:relative; z-index:3;
+    display:flex; align-items:flex-start; justify-content:space-between; gap:8mm;
+    background:#fff;
+  }
+  .cover-modern .cover-brand{ display:flex; align-items:center; }
+  .cover-modern .cover-brand-logo{ width:68mm; max-height:34mm; object-fit:contain; object-position:left center; display:block; }
+  .cover-modern .cover-header-meta{ text-align:right; padding-top:3mm; }
+  .cover-modern .cover-header-meta .y{ font-family:"Oswald",sans-serif; font-weight:600; font-size:13px; letter-spacing:.14em; color:var(--orange-dark); }
+  .cover-modern .cover-header-meta .m{ margin-top:2mm; font-size:8.5px; letter-spacing:.2em; font-weight:600; color:var(--charcoal); }
+  .cover-modern .cover-rule{ flex:0 0 2.2mm; background:var(--orange); position:relative; z-index:3; }
+
+  .cover-modern .cover-hero{ flex:1 1 auto; min-height:118mm; position:relative; overflow:hidden; background:#1f1e22; }
+  .cover-modern .cover-hero img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block; filter:saturate(.9) contrast(1.06); }
+  /* Voile sombre : garantit la lisibilité du titre quelle que soit la photo. */
+  .cover-modern .cover-hero::before{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg,rgba(23,22,26,.34) 0%,rgba(23,22,26,.06) 34%,rgba(23,22,26,.72) 82%,rgba(23,22,26,.94) 100%);
+  }
+  /* Chevron orange : rappel du toit du logo. */
+  .cover-modern .cover-hero::after{
+    content:""; position:absolute; z-index:2; left:-10mm; bottom:-4mm; width:86mm; height:30mm;
+    background:var(--orange); clip-path:polygon(0 100%,44% 0,100% 100%);
+    opacity:.16;
+  }
+  .cover-modern .cover-hero-label{
+    position:absolute; z-index:3; left:14mm; top:9mm;
+    color:#fff; font-family:"Oswald",sans-serif; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; line-height:1.7;
+  }
+  .cover-modern .cover-hero-label b{ display:block; border-left:2.5px solid var(--orange); padding-left:7px; font-weight:500; }
+
+  .cover-modern .cover-title-band{
+    position:absolute; z-index:4; left:0; right:0; bottom:0; padding:0 14mm 11mm;
+  }
+  .cover-modern .cover-kicker{
+    display:inline-block; background:var(--orange); color:#fff;
+    font-family:"Oswald",sans-serif; font-size:11px; letter-spacing:.2em; padding:3.5mm 6mm; margin-bottom:6mm;
+  }
+  .cover-modern .cover-title{
+    color:#fff; font-family:"Oswald","Arial Narrow",sans-serif; font-weight:600;
+    font-size:60px; line-height:.92; letter-spacing:.005em; text-transform:uppercase;
+  }
+  .cover-modern .cover-title em{ display:block; font-style:normal; color:var(--orange); }
+  .cover-modern .cover-activities{
+    margin-top:7mm; padding-top:4.5mm; border-top:1px solid rgba(255,255,255,.3);
+    color:var(--sand); font-family:"Oswald",sans-serif; font-size:11.5px; letter-spacing:.18em;
+  }
+  .cover-modern .cover-activities i{ font-style:normal; color:var(--orange); padding:0 4px; }
+
+  .cover-modern .cover-footer{
+    flex:0 0 26mm; position:relative; overflow:hidden; background:var(--near-black);
+    display:flex; align-items:center; justify-content:space-between; gap:8mm; padding:0 14mm;
+    color:#fff;
+  }
+  .cover-modern .cover-footer .fact{ display:flex; align-items:baseline; gap:3mm; }
+  .cover-modern .cover-footer .fact .n{ font-family:"Oswald",sans-serif; font-size:19px; color:var(--orange); line-height:1; }
+  .cover-modern .cover-footer .fact .l{ font-size:8.5px; line-height:1.35; letter-spacing:.04em; color:#cfcbc3; max-width:24ch; }
+  .cover-modern .cover-footer::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:2.2mm; background:var(--orange);
+  }
+
   @media print{
     .cover-modern,.cover-modern *{
       -webkit-print-color-adjust:exact !important;
       print-color-adjust:exact !important;
       color-adjust:exact !important;
     }
-    .cover-modern .cover-header{ background:#1e3a8a !important; }
-    .cover-modern .cover-hero{ background:#182849 !important; }
+    .cover-modern .cover-header{ background:#fff !important; }
+    .cover-modern .cover-hero{ background:#1f1e22 !important; }
     .cover-modern .cover-hero img{ display:block !important; visibility:visible !important; opacity:1 !important; }
-    .cover-modern .cover-title-band{ background:#132e67 !important; }
-    .cover-modern .cover-footer{ background:#1e3a8a !important; }
+    .cover-modern .cover-footer{ background:#17161A !important; }
   }
-  @media(max-width:700px){ .cover-modern .cover-header{ min-height:190px; padding:36px 38px 28px; }.cover-modern .cover-brand-logo{ width:205px; max-height:128px; }.cover-modern .cover-hero{ height:310px; }.cover-modern .cover-title-band{ min-height:190px; padding:38px; }.cover-modern .cover-footer{ min-height:140px; } }
+  @media(max-width:700px){
+    .cover-modern .cover-header{ flex:0 0 auto; padding:24px 24px 16px; }
+    .cover-modern .cover-brand-logo{ width:170px; max-height:88px; }
+    .cover-modern .cover-hero{ min-height:430px; }
+    .cover-modern .cover-title{ font-size:44px; }
+    .cover-modern .cover-title-band{ padding:0 24px 28px; }
+    .cover-modern .cover-footer{ flex:0 0 auto; padding:20px 24px; flex-wrap:wrap; gap:16px; }
+  }
 
   .toc-list{ margin-top:6mm; }
   .toc-item{
@@ -303,36 +361,52 @@
 
   .legacy-catalog-page{ display:none; }
   .product-sheet{ display:block; }
-  .product-sheet .sheet-kicker{ font-size:30px; font-weight:800; color:#6c6d70; letter-spacing:.03em; }
-  .product-sheet .sheet-family{ margin-top:2px; color:var(--orange-dark); font:700 22px "Oswald","Arial Narrow",sans-serif; text-transform:uppercase; }
-  .product-sheet .sheet-rule{ height:3px; background:var(--near-black); margin-top:9px; }
+  .product-sheet .sheet-kicker{ font-family:"Oswald",sans-serif; font-size:12px; font-weight:500; color:var(--orange-dark); letter-spacing:.2em; text-transform:uppercase; }
+  .product-sheet .sheet-family{ margin-top:3px; color:var(--near-black); font:600 30px/1 "Oswald","Arial Narrow",sans-serif; text-transform:uppercase; letter-spacing:.01em; }
+  .product-sheet .sheet-rule{ height:3px; background:var(--near-black); margin-top:9px; position:relative; }
+  .product-sheet .sheet-rule::after{ content:""; position:absolute; left:0; top:0; width:26mm; height:100%; background:var(--orange); }
   .product-sheet .sheet-hero{ height:105mm; margin-top:8mm; display:grid; grid-template-columns:1.75fr .85fr; gap:8mm; align-items:stretch; border-bottom:2px solid var(--near-black); overflow:hidden; }
-  .product-sheet .sheet-image{ height:100%; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(135deg, #f1efea, #f1efea 10px, #e9e6df 10px, #e9e6df 20px); border:1px solid var(--line); }
+  .product-sheet .sheet-image{ height:100%; display:flex; align-items:center; justify-content:center; background:radial-gradient(120% 95% at 50% 22%, #ffffff 0%, #f2f0ec 58%, #e7e4dd 100%); border:1px solid var(--line); }
   .product-sheet .sheet-image img{ width:100%; height:100%; object-fit:contain; padding:8mm; display:block; }
-  .product-sheet .sheet-side{ display:flex; flex-direction:column; gap:8mm; height:100%; justify-content:center; }
-  .product-sheet .sheet-ref{ color:#737477; font:700 27px "Oswald","Arial Narrow",sans-serif; border-bottom:2px solid #737477; padding-bottom:6px; }
-  .product-sheet .sheet-ref span{ display:block; font-size:13px; color:var(--orange-dark); letter-spacing:.06em; margin-bottom:4px; }
-  .product-sheet .sheet-format{ border:1px solid var(--charcoal); padding:9px 12px; }
-  .product-sheet .sheet-format span{ display:block; font-family:"Oswald",sans-serif; font-size:11px; color:var(--orange-dark); letter-spacing:.06em; margin-bottom:4px; }
-  .product-sheet .sheet-format b{ display:block; font-family:"Oswald","Arial Narrow",sans-serif; font-size:15px; font-weight:600; color:var(--near-black); line-height:1.3; }
+  .product-sheet .sheet-side{ display:flex; flex-direction:column; gap:6mm; height:100%; justify-content:center; }
+  .product-sheet .sheet-ref{ color:var(--near-black); font:600 26px/1.05 "Oswald","Arial Narrow",sans-serif; border-bottom:3px solid var(--orange); padding-bottom:6px; }
+  .product-sheet .sheet-ref span{ display:block; font-family:"Inter",sans-serif; font-size:9px; font-weight:700; color:var(--orange-dark); letter-spacing:.14em; margin-bottom:5px; }
+  .product-sheet .sheet-format{ border:1px solid var(--line); border-left:3px solid var(--near-black); background:#fff; padding:9px 12px; }
+  .product-sheet .sheet-format span{ display:block; font-family:"Inter",sans-serif; font-size:9px; font-weight:700; color:var(--orange-dark); letter-spacing:.14em; margin-bottom:4px; }
+  .product-sheet .sheet-format b{ display:block; font-family:"Oswald","Arial Narrow",sans-serif; font-size:15px; font-weight:500; color:var(--near-black); line-height:1.3; }
   .product-sheet .sheet-lower{ display:grid; grid-template-columns:1.55fr .9fr; gap:8mm; margin-top:8mm; flex:none; }
-  .product-sheet .sheet-info h3,.product-sheet .sheet-copy h3{ color:#737477; font:700 20px "Oswald","Arial Narrow",sans-serif; border-bottom:2px solid #737477; padding-bottom:4px; }
-  .product-sheet .sheet-info{ color:#77797b; font-size:12px; line-height:1.55; }
-  .product-sheet .sheet-info p{ padding:4px 0; border-bottom:1px solid #e0ded9; }
+  .product-sheet .sheet-info h3,.product-sheet .sheet-copy h3{ color:var(--near-black); font:500 17px "Oswald","Arial Narrow",sans-serif; text-transform:uppercase; letter-spacing:.06em; border-bottom:2px solid var(--near-black); padding-bottom:5px; }
+  .product-sheet .sheet-info{ color:#4b4a4e; font-size:12px; line-height:1.55; }
+  .product-sheet .sheet-info p{ padding:4px 0; border-bottom:1px solid #e6e3dd; }
   .product-sheet .sheet-info b{ color:var(--near-black); }
   .product-sheet .technical-details{ margin-top:7px; }
   .product-sheet .technical-details table{ width:100%; border-collapse:collapse; font-size:11px; }
-  .product-sheet .technical-details th,.product-sheet .technical-details td{ padding:6px 8px; border:1px solid #d8d6d0; text-align:left; }
-  .product-sheet .technical-details th{ width:54%; color:var(--near-black); background:#f2f0eb; font-weight:700; }
+  .product-sheet .technical-details th,.product-sheet .technical-details td{ padding:6px 8px; border:1px solid #dedbd4; text-align:left; }
+  .product-sheet .technical-details th{ width:54%; color:var(--near-black); background:#f0eee9; font-weight:600; }
+  .product-sheet .technical-details td{ color:var(--near-black); font-variant-numeric:tabular-nums; }
   .product-sheet .technical-details tr:nth-child(even) td{ background:#fbfaf8; }
-  .product-sheet .sheet-copy{ color:var(--charcoal); font-size:13px; line-height:1.55; }
+  .product-sheet .sheet-copy{ color:#4b4a4e; font-size:13px; line-height:1.6; }
   .product-sheet .sheet-copy p + p{ margin-top:10px; }
   .product-sheet .sheet-copy strong{ color:var(--near-black); }
-  .product-sheet .sheet-callout{ margin-top:8mm; color:var(--orange-dark); font-weight:700; font-size:11px; letter-spacing:.03em; }
+
+  /* Pictogrammes d'usage : dérivés de l'épaisseur indiquée dans la fiche. */
+  .product-sheet .sheet-usage{ margin-top:7mm; }
+  .product-sheet .sheet-usage .u-title{ font-family:"Inter",sans-serif; font-size:9px; font-weight:700; letter-spacing:.14em; color:var(--orange-dark); margin-bottom:5px; }
+  .product-sheet .sheet-usage .u-list{ display:flex; flex-wrap:wrap; gap:5px; }
+  .product-sheet .sheet-usage .u{ display:flex; align-items:center; gap:5px; border:1px solid var(--line); background:#fff; padding:4px 8px; font-size:9.5px; font-weight:600; color:var(--near-black); }
+  .product-sheet .sheet-usage .u svg{ width:13px; height:13px; flex:none; fill:var(--orange); }
+  .product-sheet .sheet-usage .u.off{ color:#b6b2aa; border-style:dashed; }
+  .product-sheet .sheet-usage .u.off svg{ fill:#cdc9c1; }
+
+  .product-sheet .sheet-callout{
+    margin-top:8mm; background:var(--near-black); color:#fff; padding:7px 11px;
+    font-family:"Oswald",sans-serif; font-weight:400; font-size:11px; letter-spacing:.1em;
+    border-left:4px solid var(--orange);
+  }
   /* Fiche H6/H8 : tableau détaillé maintenu sur une seule page A4. */
   .product-sheet.compact-product-sheet{ padding-top:11mm; padding-bottom:13mm; }
-  .product-sheet.compact-product-sheet .sheet-kicker{ font-size:25px; }
-  .product-sheet.compact-product-sheet .sheet-family{ font-size:19px; }
+  .product-sheet.compact-product-sheet .sheet-kicker{ font-size:10.5px; }
+  .product-sheet.compact-product-sheet .sheet-family{ font-size:24px; }
   .product-sheet.compact-product-sheet .sheet-rule{ margin-top:5px; }
   .product-sheet.compact-product-sheet .sheet-hero{ flex:0 0 47mm; min-height:0; margin-top:4mm; gap:7mm; }
   .product-sheet.compact-product-sheet .sheet-image img{ max-height:45mm; padding:2mm; }
@@ -341,7 +415,9 @@
   .product-sheet.compact-product-sheet .sheet-format{ padding:6px 9px; }
   .product-sheet.compact-product-sheet .sheet-format b{ font-size:12.5px; }
   .product-sheet.compact-product-sheet .sheet-lower{ gap:7mm; margin-top:8mm; }
-  .product-sheet.compact-product-sheet .sheet-info h3,.product-sheet.compact-product-sheet .sheet-copy h3{ font-size:18px; padding-bottom:3px; }
+  .product-sheet.compact-product-sheet .sheet-info h3,.product-sheet.compact-product-sheet .sheet-copy h3{ font-size:15px; padding-bottom:3px; }
+  .product-sheet.compact-product-sheet .sheet-usage{ margin-top:4mm; }
+  .product-sheet.compact-product-sheet .sheet-usage .u{ padding:3px 6px; font-size:9px; }
   .product-sheet.compact-product-sheet .sheet-info{ font-size:11px; line-height:1.35; }
   .product-sheet.compact-product-sheet .sheet-info p{ padding:3px 0; }
   .product-sheet.compact-product-sheet .technical-details{ margin-top:5px; }
@@ -352,6 +428,81 @@
   .product-sheet.compact-product-sheet .sheet-callout{ margin-top:5mm; font-size:9px; }
   @media print{ .product-sheet.compact-product-sheet .sheet-hero{ height:47mm; } }
   @media(max-width:700px){ .product-sheet .sheet-hero{ height:auto; min-height:0; grid-template-columns:1fr; gap:4mm; padding:4mm 0 8mm; } .product-sheet .sheet-image{ height:70mm; } .product-sheet .sheet-side{ flex-direction:row; gap:4mm; height:auto; } .product-sheet .sheet-ref{ font-size:23px; } .product-sheet .sheet-lower{ grid-template-columns:1fr; gap:6mm; } }
+
+  /* =====================================================================
+     FINITION ÉDITORIALE — repères de tranche, folio, hiérarchie de titres
+     ===================================================================== */
+
+  /* Onglet de tranche : permet de retrouver une famille en feuilletant.
+     La position verticale suit l'ordre des familles (--thumb-i). */
+  .page[data-thumb]::before{
+    content:attr(data-thumb);
+    position:absolute; right:0; z-index:6;
+    top:calc(34mm + var(--thumb-i, 0) * 25mm);
+    width:8.5mm; height:23mm;
+    display:flex; align-items:center; justify-content:center;
+    writing-mode:vertical-rl; text-orientation:mixed;
+    background:var(--orange); color:#fff;
+    font-family:"Oswald","Arial Narrow",sans-serif; font-weight:500;
+    font-size:8.5px; letter-spacing:.12em; text-transform:uppercase;
+    white-space:nowrap; overflow:hidden;
+  }
+  .page[data-thumb="À PROPOS"]::before,
+  .page[data-thumb="SERVICES"]::before{ background:var(--near-black); }
+  /* Rappel discret des autres familles, comme une tranche de classeur. */
+  .page[data-thumb]::after{
+    content:""; position:absolute; right:0; top:34mm; z-index:5;
+    width:2.5mm; height:calc(var(--thumb-total, 9) * 25mm - 2mm);
+    background:repeating-linear-gradient(180deg, var(--concrete-light) 0 23mm, transparent 23mm 25mm);
+  }
+  @media(max-width:700px){ .page[data-thumb]::before,.page[data-thumb]::after{ display:none; } }
+
+  .running-head .section-tag{
+    font-family:"Oswald","Arial Narrow",sans-serif; font-size:11px; font-weight:500;
+    letter-spacing:.14em; color:var(--near-black); text-transform:uppercase;
+    border-left:3px solid var(--orange); padding-left:8px;
+  }
+
+  .section-title h2{ letter-spacing:.005em; text-transform:uppercase; }
+  .section-title .sub{ max-width:78ch; }
+
+  .running-foot{ font-family:"Inter",sans-serif; letter-spacing:.04em; }
+  .running-foot span:last-child{
+    font-family:"Oswald",sans-serif; font-size:11px; color:#fff; background:var(--near-black);
+    min-width:7mm; text-align:center; padding:2px 5px;
+  }
+  .running-foot span:last-child:empty{ display:none; }
+
+  .divider-sub-tag{ background:var(--near-black); color:#fff; }
+
+  /* Index des références : récapitulatif de fin de catalogue. */
+  .index-table{ width:100%; border-collapse:collapse; margin-top:8mm; font-size:11px; }
+  .index-table th,.index-table td{ border-bottom:1px solid var(--line); padding:6.5px 8px; text-align:left; vertical-align:top; }
+  .index-table thead th{
+    background:var(--near-black); color:#fff; border-bottom:none;
+    font-family:"Oswald",sans-serif; font-weight:400; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  }
+  .index-table td.r{ font-family:"Oswald",sans-serif; font-size:11.5px; color:var(--orange-dark); white-space:nowrap; }
+  .index-table td.n{ font-weight:600; color:var(--near-black); }
+  .index-table td.f{ color:var(--charcoal); }
+  .index-table td.d{ color:var(--charcoal); font-variant-numeric:tabular-nums; }
+  .index-table tbody tr:nth-child(even) td{ background:#fbfaf8; }
+  .index-table tbody tr.fam-head td{
+    background:var(--concrete-light); font-family:"Oswald",sans-serif; font-size:10.5px;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--near-black); padding:5px 8px;
+  }
+  .index-legend{ margin-top:7mm; display:flex; flex-wrap:wrap; gap:6mm; font-size:10px; color:var(--charcoal); }
+  .index-legend b{ color:var(--near-black); }
+
+  /* Fidélité couleur à l'impression : sans cette règle, Chrome et Edge
+     suppriment les aplats orange et noirs du catalogue. */
+  @media print{
+    html,body,.page,.page *{
+      -webkit-print-color-adjust:exact !important;
+      print-color-adjust:exact !important;
+      color-adjust:exact !important;
+    }
+  }
 
 </style>
 </head>
@@ -387,20 +538,29 @@
     <div class="cover-brand">
       <img class="cover-brand-logo" src="logo.png" alt="Logo SOMATRAC Matériaux">
     </div>
-    <p class="cover-tagline">EXPERTS EN TRAVAUX PUBLICS</p>
+    <div class="cover-header-meta">
+      <div class="y">ÉDITION 2026 / 2027</div>
+      <div class="m">FABRICANT DE PRODUITS EN BÉTON — AGADIR</div>
+    </div>
   </header>
+  <div class="cover-rule"></div>
 
   <section class="cover-hero" aria-label="Usine de production SOMATRAC Matériaux">
     <img src="usine-vue-aerienne.jpg" alt="Vue aérienne de l'usine de production SOMATRAC Matériaux à Agadir">
-    <div class="cover-hero-label">Fabricant direct<br>usine &amp; stock<br>à Agadir</div>
+    <div class="cover-hero-label"><b>Fabricant direct — usine &amp; stock à Agadir</b></div>
+
+    <div class="cover-title-band">
+      <div class="cover-kicker">CATALOGUE GÉNÉRAL</div>
+      <h1 class="cover-title">Matériaux<br><em>béton</em></h1>
+      <p class="cover-activities">AMÉNAGEMENT <i>—</i> VOIRIE <i>—</i> PAVAGE <i>—</i> CONSTRUCTION</p>
+    </div>
   </section>
 
-  <section class="cover-title-band">
-    <h1 class="cover-title">CATALOGUE<br>2026/2027</h1>
-    <p class="cover-activities">MATÉRIAUX <span class="text-white">—</span> AMÉNAGEMENT <span class="text-white">—</span> VOIRIE <span class="text-white">—</span> PAVAGE</p>
-  </section>
-
-  <footer class="cover-footer" aria-label="Bandeau décoratif"></footer>
+  <footer class="cover-footer">
+    <div class="fact"><span class="n">07</span><span class="l">familles de produits béton</span></div>
+    <div class="fact"><span class="n">EN</span><span class="l">produits conformes aux normes EN 1338 / 1339 / 1340</span></div>
+    <div class="fact"><span class="n">01</span><span class="l">unité de production intégrée, sans intermédiaire</span></div>
+  </footer>
 </div>
 
 <!-- PAGE 2 — À PROPOS -->
@@ -469,6 +629,7 @@
     <div class="toc-item"><a class="toc-link" href="#hourdis-intro"><div class="n">05</div><div class="t">Hourdis</div><div class="d">Éléments de remplissage pour planchers</div></a></div>
     <div class="toc-item"><a class="toc-link" href="#poutrelles-intro"><div class="n">06</div><div class="t">Poutrelles</div><div class="d">Éléments préfabriqués pour planchers béton</div></a></div>
     <div class="toc-item"><a class="toc-link" href="#services"><div class="n">07</div><div class="t">Services &amp; demande de devis</div><div class="d">Accompagnement, disponibilité et livraison</div></a></div>
+    <div class="toc-item"><a class="toc-link" href="#index-references"><div class="n">—</div><div class="t">Index des références</div><div class="d">Toutes les références par famille de produits</div></a></div>
   </div>
 
   <div class="intro-block">
@@ -660,16 +821,6 @@
       </div>
     </div>
 
-    <!-- PHOTO: pave-blocs-serie -->
-    <div class="card">
-      <div class="photo" data-shape="rectangle" data-dim="10 × 20 cm"><img src="Pavé Brique.jpeg" alt="Pavé brique en série"><span class="ph-label">VISUEL PRODUIT</span></div>
-      <div class="body">
-        <div class="ref">RÉF. SMT-PV04</div>
-        <div class="name">Pavé Brique &amp; blocs</div>
-        <div class="specs">Formats : <b>120×60×60 mm</b> — <b>120×120×60 mm</b> — <b>180×120×60 mm</b></div>
-      </div>
-    </div>
-
   </div>
 
   <div class="running-foot">
@@ -691,16 +842,6 @@
   </div>
 
   <div class="grid">
-
-    <!-- PHOTO: pave-vague -->
-    <div class="card">
-      <div class="photo" data-shape="wave" data-dim="ép. 6 / 8 cm"><img src="Pavé Vague.jpeg" alt="Pavé vague bicolore"><span class="ph-label">VISUEL PRODUIT</span></div>
-      <div class="body">
-        <div class="ref">RÉF. SMT-PV05</div>
-        <div class="name">Pavé Vague</div>
-        <div class="specs">Épaisseur : <b>6 cm / 8 cm</b><br>Bicolore possible (bandeau + corps)</div>
-      </div>
-    </div>
 
     <!-- PHOTO: pave-zigzag -->
     <div class="card">
@@ -1116,10 +1257,6 @@
           </tbody></table>
         </div></div>
     </div>
-    <div class="card">
-      <div class="photo" data-shape="border" data-dim="dimensions sur demande"><img src="F1.jpeg" alt="Bordure F1 en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
-      <div class="body"><div class="ref">RÉF. F1</div><div class="name">Bordure F1</div><div class="specs">Élément de finition pour voiries et espaces extérieurs.<br>Format et disponibilité : <b>sur demande</b></div></div>
-    </div>
   </div>
 
   <div class="running-foot">
@@ -1171,15 +1308,6 @@
   </div>
 
   <div class="grid">
-    <div class="card">
-      <div class="photo" data-shape="channel" data-dim="dimensions sur demande"><img src="simplepente.jpeg" alt="Caniveau simple pente"><span class="ph-label">VISUEL PRODUIT</span></div>
-      <div class="body"><div class="ref">RÉF. SMT-CV01</div><div class="name">Caniveau simple pente</div><div class="specs">Profil pour guider les eaux vers le point d'évacuation.<br>Format et adaptation au chantier : <b>sur demande</b></div></div>
-    </div>
-    <div class="card">
-      <div class="photo" data-shape="channel" data-dim="dimensions sur demande"><img src="doublepentecc.jpeg" alt="Caniveau double pente"><span class="ph-label">VISUEL PRODUIT</span></div>
-      <div class="body"><div class="ref">RÉF. SMT-CV02</div><div class="name">Caniveau double pente</div><div class="specs">Profil central pour la collecte des eaux pluviales sur deux versants.<br>Format et adaptation au chantier : <b>sur demande</b></div></div>
-    </div>
-
     <div class="card">
       <div class="photo" data-shape="channel" data-dim="100 × 40 × 12 cm"><img src="simplepente.jpeg" alt="Caniveau CC1"><span class="ph-label">VISUEL PRODUIT</span></div>
       <div class="body" data-description="Le caniveau CC1 facilite la collecte et l'évacuation des eaux pluviales dans les voiries et aménagements extérieurs.">
@@ -1275,8 +1403,84 @@
 
   <div class="grid">
     <div class="card">
-      <div class="photo" data-shape="block" data-dim="format sur demande"><img src="agglos.jpeg" alt="Agglo creux en béton"><span class="ph-label">VISUEL PRODUIT</span></div>
-      <div class="body"><div class="ref">RÉF. SMT-AG01</div><div class="name">Bloc béton creux</div><div class="specs">Bloc béton pour murs, cloisons et ouvrages de maçonnerie.<br>Format et disponibilité : <b>selon votre projet</b></div></div>
+      <div class="photo" data-shape="block" data-dim="50 × 19 cm · ép. 7 cm"><img src="agglos.jpeg" alt="Agglo creux en béton 7 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'agglo 7 cm est un bloc léger utilisé pour les cloisons de distribution intérieures et les doublages légers.">
+        <div class="ref">RÉF. SMT-AG07</div><div class="name">Agglo creux 7 cm</div>
+        <div class="specs">Format : <b>50 × 19 cm</b><br>Épaisseur : <b>7 cm</b> — Poids ≈ <b>9,3 kg</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'agglo 7 cm"><tbody>
+          <tr><th>Format</th><td>50 × 19 cm</td></tr>
+          <tr><th>Épaisseur</th><td>7 cm</td></tr>
+          <tr><th>Nombre d'alvéoles</th><td>3</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 9,3 kg</td></tr>
+          <tr><th>Nombre / palette</th><td>182</td></tr>
+          <tr><th>Résistance à la compression</th><td>≥ 3 MPa (classe B30)</td></tr>
+          <tr><th>Norme applicable</th><td>NM 10.1.009</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="50 × 19 cm · ép. 10 cm"><img src="agglos.jpeg" alt="Agglo creux en béton 10 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'agglo 10 cm convient aux cloisons de distribution intérieures et aux petites séparations non porteuses.">
+        <div class="ref">RÉF. SMT-AG10</div><div class="name">Agglo creux 10 cm</div>
+        <div class="specs">Format : <b>50 × 19 cm</b><br>Épaisseur : <b>10 cm</b> — Poids ≈ <b>10,3 kg</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'agglo 10 cm"><tbody>
+          <tr><th>Format</th><td>50 × 19 cm</td></tr>
+          <tr><th>Épaisseur</th><td>10 cm</td></tr>
+          <tr><th>Nombre d'alvéoles</th><td>3</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 10,3 kg</td></tr>
+          <tr><th>Nombre / palette</th><td>140</td></tr>
+          <tr><th>Résistance à la compression</th><td>≥ 3 MPa (classe B30)</td></tr>
+          <tr><th>Norme applicable</th><td>NM 10.1.009</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="50 × 19 cm · ép. 15 cm"><img src="agglos.jpeg" alt="Agglo creux en béton 15 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'agglo 15 cm est utilisé pour les murs de refend, les clôtures et les ouvrages semi-porteurs.">
+        <div class="ref">RÉF. SMT-AG15</div><div class="name">Agglo creux 15 cm</div>
+        <div class="specs">Format : <b>50 × 19 cm</b><br>Épaisseur : <b>15 cm</b> — Poids ≈ <b>15,3 kg</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'agglo 15 cm"><tbody>
+          <tr><th>Format</th><td>50 × 19 cm</td></tr>
+          <tr><th>Épaisseur</th><td>15 cm</td></tr>
+          <tr><th>Nombre d'alvéoles</th><td>6</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 15,3 kg</td></tr>
+          <tr><th>Nombre / palette</th><td>112</td></tr>
+          <tr><th>Résistance à la compression</th><td>≥ 3 MPa (classe B30)</td></tr>
+          <tr><th>Norme applicable</th><td>NM 10.1.009</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="50 × 19 cm · ép. 20 cm"><img src="agglos.jpeg" alt="Agglo creux en béton 20 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'agglo 20 cm est destiné aux murs extérieurs, aux façades et au remplissage de structure en béton armé.">
+        <div class="ref">RÉF. SMT-AG20</div><div class="name">Agglo creux 20 cm</div>
+        <div class="specs">Format : <b>50 × 19 cm</b><br>Épaisseur : <b>20 cm</b> — Poids ≈ <b>18,5 kg</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'agglo 20 cm"><tbody>
+          <tr><th>Format</th><td>50 × 19 cm</td></tr>
+          <tr><th>Épaisseur</th><td>20 cm</td></tr>
+          <tr><th>Nombre d'alvéoles</th><td>6</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 18,5 kg</td></tr>
+          <tr><th>Nombre / palette</th><td>80</td></tr>
+          <tr><th>Résistance à la compression</th><td>≥ 3 MPa (classe B30)</td></tr>
+          <tr><th>Norme applicable</th><td>NM 10.1.009</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="50 × 19 cm · ép. 25 cm"><img src="agglos.jpeg" alt="Agglo creux en béton 25 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'agglo 25 cm est réservé aux ouvrages fortement sollicités : murs porteurs épais, soubassements et façades exposées.">
+        <div class="ref">RÉF. SMT-AG25</div><div class="name">Agglo creux 25 cm</div>
+        <div class="specs">Format : <b>50 × 19 cm</b><br>Épaisseur : <b>25 cm</b> — Poids ≈ <b>23,6 kg</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'agglo 25 cm"><tbody>
+          <tr><th>Format</th><td>50 × 19 cm</td></tr>
+          <tr><th>Épaisseur</th><td>25 cm</td></tr>
+          <tr><th>Nombre d'alvéoles</th><td>9</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 23,6 kg</td></tr>
+          <tr><th>Nombre / palette</th><td>64</td></tr>
+          <tr><th>Résistance à la compression</th><td>≥ 3 MPa (classe B30)</td></tr>
+          <tr><th>Norme applicable</th><td>NM 10.1.009</td></tr>
+        </tbody></table></div>
+      </div>
     </div>
   </div>
 
@@ -1330,11 +1534,68 @@
 
   <div class="grid">
     <div class="card">
-      <div class="photo" data-shape="block" data-dim="20 × 20 × 52 cm"><img src="houdris.jpeg" alt="Hourdis béton pour plancher"><span class="ph-label">VISUEL PRODUIT</span></div>
-      <div class="body" data-description="L'hourdis béton est un élément de remplissage destiné aux planchers poutrelles-hourdis.">
-        <div class="ref">RÉF. SMT-HO01</div><div class="name">Hourdis béton</div>
+      <div class="photo" data-shape="block" data-dim="20 × 52 cm · ép. 8 cm"><img src="houdris.jpeg" alt="Hourdis béton pour plancher 8 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'hourdis 8 cm est un élément de remplissage léger destiné aux planchers poutrelles-hourdis de faible portée.">
+        <div class="ref">RÉF. SMT-HO08</div><div class="name">Hourdis 8 cm</div>
+        <div class="specs">Dimensions : <b>20 × 52 × 8 cm</b><br>Poids unitaire : <b>≈ 9,2 kg</b><br>Résistance à 28 jours : <b>moyenne ≥ 220 daN</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'hourdis 8 cm"><tbody>
+          <tr><th>Dimensions de l'hourdis</th><td>20 × 52 × 8 cm</td></tr>
+          <tr><th>Longueur</th><td>20 cm ± 5 mm</td></tr>
+          <tr><th>Largeur</th><td>52 cm ± 3 mm</td></tr>
+          <tr><th>Hauteur</th><td>8 cm ± 3 mm</td></tr>
+          <tr><th>Largeur feuillure</th><td>2 cm ± 2 mm</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 9,2 kg ± 5 %</td></tr>
+          <tr><th>Nombre / palette</th><td>168</td></tr>
+          <tr><th>Porosité</th><td>&lt; 18 % du poids sec</td></tr>
+          <tr><th>Résistance mécanique à 2 jours</th><td>Moyenne ≥ 132 daN</td></tr>
+          <tr><th>Résistance mécanique à 28 jours</th><td>Moyenne ≥ 220 daN</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="20 × 52 cm · ép. 12 cm"><img src="houdris.jpeg" alt="Hourdis béton pour plancher 12 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'hourdis 12 cm est destiné aux planchers poutrelles-hourdis de portée courante.">
+        <div class="ref">RÉF. SMT-HO12</div><div class="name">Hourdis 12 cm</div>
+        <div class="specs">Dimensions : <b>20 × 52 × 12 cm</b><br>Poids unitaire : <b>≈ 11,5 kg</b><br>Résistance à 28 jours : <b>moyenne ≥ 220 daN</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'hourdis 12 cm"><tbody>
+          <tr><th>Dimensions de l'hourdis</th><td>20 × 52 × 12 cm</td></tr>
+          <tr><th>Longueur</th><td>20 cm ± 5 mm</td></tr>
+          <tr><th>Largeur</th><td>52 cm ± 3 mm</td></tr>
+          <tr><th>Hauteur</th><td>12 cm ± 3 mm</td></tr>
+          <tr><th>Largeur feuillure</th><td>2 cm ± 2 mm</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 11,5 kg ± 5 %</td></tr>
+          <tr><th>Nombre / palette</th><td>128</td></tr>
+          <tr><th>Porosité</th><td>&lt; 18 % du poids sec</td></tr>
+          <tr><th>Résistance mécanique à 2 jours</th><td>Moyenne ≥ 132 daN</td></tr>
+          <tr><th>Résistance mécanique à 28 jours</th><td>Moyenne ≥ 220 daN</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="20 × 52 cm · ép. 16 cm"><img src="houdris.jpeg" alt="Hourdis béton pour plancher 16 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'hourdis 16 cm convient aux planchers de portée moyenne à élevée.">
+        <div class="ref">RÉF. SMT-HO16</div><div class="name">Hourdis 16 cm</div>
+        <div class="specs">Dimensions : <b>20 × 52 × 16 cm</b><br>Poids unitaire : <b>≈ 13,7 kg</b><br>Résistance à 28 jours : <b>moyenne ≥ 220 daN</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'hourdis 16 cm"><tbody>
+          <tr><th>Dimensions de l'hourdis</th><td>20 × 52 × 16 cm</td></tr>
+          <tr><th>Longueur</th><td>20 cm ± 5 mm</td></tr>
+          <tr><th>Largeur</th><td>52 cm ± 3 mm</td></tr>
+          <tr><th>Hauteur</th><td>16 cm ± 3 mm</td></tr>
+          <tr><th>Largeur feuillure</th><td>2 cm ± 2 mm</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 13,7 kg ± 5 %</td></tr>
+          <tr><th>Nombre / palette</th><td>96</td></tr>
+          <tr><th>Porosité</th><td>&lt; 18 % du poids sec</td></tr>
+          <tr><th>Résistance mécanique à 2 jours</th><td>Moyenne ≥ 132 daN</td></tr>
+          <tr><th>Résistance mécanique à 28 jours</th><td>Moyenne ≥ 220 daN</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="20 × 20 × 52 cm"><img src="houdris.jpeg" alt="Hourdis béton pour plancher 20 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'hourdis 20 cm est un élément de remplissage destiné aux planchers poutrelles-hourdis de portée importante.">
+        <div class="ref">RÉF. SMT-HO20</div><div class="name">Hourdis 20 cm</div>
         <div class="specs">Dimensions : <b>20 × 20 × 52 cm</b><br>Poids unitaire : <b>17,945 kg ± 5 %</b><br>Résistance à 28 jours : <b>moyenne ≥ 220 daN</b></div>
-        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'hourdis béton"><tbody>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'hourdis 20 cm"><tbody>
           <tr><th>Dimensions de l'hourdis</th><td>20 × 20 × 52 cm</td></tr>
           <tr><th>Longueur</th><td>20 cm ± 5 mm</td></tr>
           <tr><th>Largeur</th><td>52 cm ± 3 mm</td></tr>
@@ -1342,6 +1603,25 @@
           <tr><th>Largeur feuillure</th><td>2 cm ± 2 mm</td></tr>
           <tr><th>Poids unitaire</th><td>17,945 kg ± 5 %</td></tr>
           <tr><th>Nombre / palette</th><td>80</td></tr>
+          <tr><th>Porosité</th><td>&lt; 18 % du poids sec</td></tr>
+          <tr><th>Résistance mécanique à 2 jours</th><td>Moyenne ≥ 132 daN</td></tr>
+          <tr><th>Résistance mécanique à 28 jours</th><td>Moyenne ≥ 220 daN</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo" data-shape="block" data-dim="20 × 52 cm · ép. 25 cm"><img src="houdris.jpeg" alt="Hourdis béton pour plancher 25 cm"><span class="ph-label">VISUEL PRODUIT</span></div>
+      <div class="body" data-description="L'hourdis 25 cm est destiné aux planchers de grande portée ou fortement chargés.">
+        <div class="ref">RÉF. SMT-HO25</div><div class="name">Hourdis 25 cm</div>
+        <div class="specs">Dimensions : <b>20 × 52 × 25 cm</b><br>Poids unitaire : <b>≈ 19,6 kg</b><br>Résistance à 28 jours : <b>moyenne ≥ 220 daN</b></div>
+        <div class="technical-details"><table aria-label="Caractéristiques techniques de l'hourdis 25 cm"><tbody>
+          <tr><th>Dimensions de l'hourdis</th><td>20 × 52 × 25 cm</td></tr>
+          <tr><th>Longueur</th><td>20 cm ± 5 mm</td></tr>
+          <tr><th>Largeur</th><td>52 cm ± 3 mm</td></tr>
+          <tr><th>Hauteur</th><td>25 cm ± 3 mm</td></tr>
+          <tr><th>Largeur feuillure</th><td>2 cm ± 2 mm</td></tr>
+          <tr><th>Poids unitaire</th><td>≈ 19,6 kg ± 5 %</td></tr>
+          <tr><th>Nombre / palette</th><td>64</td></tr>
           <tr><th>Porosité</th><td>&lt; 18 % du poids sec</td></tr>
           <tr><th>Résistance mécanique à 2 jours</th><td>Moyenne ≥ 132 daN</td></tr>
           <tr><th>Résistance mécanique à 28 jours</th><td>Moyenne ≥ 220 daN</td></tr>
@@ -1491,56 +1771,156 @@
     navSections.forEach(function(section) { sectionObserver.observe(section); });
   }
 
-  var productCards = Array.from(document.querySelectorAll('.legacy-catalog-page .card')).sort(function(a, b) {
-    var aOrder = Number(a.querySelector('.body')?.dataset.catalogOrder) || 100;
-    var bOrder = Number(b.querySelector('.body')?.dataset.catalogOrder) || 100;
-    return aOrder - bOrder;
-  });
-  var servicesPage = document.getElementById('services');
-  var productFragment = document.createDocumentFragment();
-  var categoryIds = {};
+  /* ---- Familles : libellé d'onglet + rang vertical sur la tranche ---- */
+  var FAMILIES = [
+    { key: 'about',      label: 'À PROPOS' },
+    { key: 'paves',      label: 'PAVÉS' },
+    { key: 'dalles',     label: 'DALLES' },
+    { key: 'edging',     label: 'BORDURES' },
+    { key: 'caniveaux',  label: 'CANIVEAUX' },
+    { key: 'agglos',     label: 'AGGLOS' },
+    { key: 'hourdis',    label: 'HOURDIS' },
+    { key: 'poutrelles', label: 'POUTRELLES' },
+    { key: 'services',   label: 'SERVICES' }
+  ];
 
-  productCards.forEach(function(card, index) {
+  function familyKey(text) {
+    if (/poutrelle/i.test(text)) return 'poutrelles';
+    if (/hourdis/i.test(text)) return 'hourdis';
+    if (/agglo|bloc/i.test(text)) return 'agglos';
+    if (/caniveau/i.test(text)) return 'caniveaux';
+    if (/bordure/i.test(text)) return 'edging';
+    if (/dalle|gazon/i.test(text)) return 'dalles';
+    if (/pavé|pave|revêtement|revetement/i.test(text)) return 'paves';
+    if (/service|devis/i.test(text)) return 'services';
+    if (/propos/i.test(text)) return 'about';
+    return '';
+  }
+
+  function applyThumb(pageEl, text) {
+    var key = familyKey(text);
+    if (!key) return;
+    var idx = FAMILIES.findIndex(function(f) { return f.key === key; });
+    if (idx < 0) return;
+    pageEl.setAttribute('data-thumb', FAMILIES[idx].label);
+    pageEl.style.setProperty('--thumb-i', idx);
+    pageEl.style.setProperty('--thumb-total', FAMILIES.length);
+  }
+
+  /* ---- Usage recommandé, déduit de l'épaisseur déclarée dans la fiche ----
+     Convention du pavage béton : 6 cm = piéton / véhicule léger,
+     8 cm et plus = circulation lourde. À valider avant diffusion. */
+  var USAGE_ICONS = {
+    pieton: '<svg viewBox="0 0 24 24"><path d="M13.5 5.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM11 22v-6H9l2.2-6.3a2 2 0 0 1 3.8.2l1 3.1h3v2h-4.4l-.6-1.8V22h-3z"/></svg>',
+    leger:  '<svg viewBox="0 0 24 24"><path d="M5 11l1.5-4.3A2 2 0 0 1 8.4 5.3h7.2a2 2 0 0 1 1.9 1.4L19 11h1v6h-2v2h-3v-2H9v2H6v-2H4v-6h1zm2.1-.6h9.8l-1-3H8.1l-1 3zM7 13.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zm10 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>',
+    lourd:  '<svg viewBox="0 0 24 24"><path d="M2 7h11v8H2V7zm12 2h3.6l2.4 3.1V15h-6V9zM6 15.8a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zm11 0a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z"/></svg>'
+  };
+
+  function thicknessCm(text) {
+    var max = 0;
+    var re = /(\d+(?:[.,]\d+)?)\s*(cm|mm)/gi;
+    var m;
+    while ((m = re.exec(text)) !== null) {
+      var v = parseFloat(m[1].replace(',', '.'));
+      if (m[2].toLowerCase() === 'mm') v = v / 10;
+      if (v > max && v <= 40) max = v;
+    }
+    return max;
+  }
+
+  function usageBlock(familyKeyName, sourceText) {
+    if (familyKeyName !== 'paves' && familyKeyName !== 'dalles') return '';
+    // On ne lit que la ligne « Épaisseur » pour éviter de confondre avec le format.
+    var line = (sourceText.match(/Épaisseurs?[^<]*<\/th>\s*<td[^>]*>([^<]*)</i) || [])[1]
+            || (sourceText.match(/Épaisseurs?\s*:\s*<b>([^<]*)</i) || [])[1] || '';
+    var ep = thicknessCm(line);
+    if (!ep) return '';
+    var rows = [
+      { k: 'pieton', l: 'Piéton', ok: true },
+      { k: 'leger',  l: 'Véhicule léger', ok: ep >= 6 },
+      { k: 'lourd',  l: 'Circulation lourde', ok: ep >= 8 }
+    ];
+    return '<div class="sheet-usage"><div class="u-title">USAGE RECOMMANDÉ</div><div class="u-list">' +
+      rows.map(function(r) {
+        return '<span class="u' + (r.ok ? '' : ' off') + '">' + USAGE_ICONS[r.k] + r.l + '</span>';
+      }).join('') + '</div></div>';
+  }
+
+  /* ---- Regroupement par famille : les fiches produit d'une famille sont
+     insérées juste après la page de présentation de cette famille, dans
+     l'ordre où les familles apparaissent (pavés, dalles, bordures, ...). ---- */
+  var families = [];
+  var familyByCategory = {};
+  Array.from(document.querySelectorAll('.legacy-catalog-page .card')).forEach(function(card) {
     var sourcePage = card.closest('.legacy-catalog-page');
     var category = sourcePage.querySelector('h2')?.textContent.trim().replace(' (suite)', '') || 'Produits béton';
-    var family = category.split('&')[0].trim();
-    var photo = card.querySelector('.photo');
-    var image = photo.querySelector('img');
-    var body = card.querySelector('.body');
-    var ref = body.querySelector('.ref')?.textContent.trim().replace('RÉF. ', '') || 'SUR DEMANDE';
-    var name = body.querySelector('.name')?.textContent.trim() || 'Produit béton';
-    var specs = body.querySelector('.specs')?.innerHTML || '';
-    var technicalDetails = body.querySelector('.technical-details')?.innerHTML || '';
-    var description = 'Une solution SOMATRAC conçue pour accompagner vos projets de construction, de voirie et d’aménagement extérieur.';
-    if (/pavé/i.test(category)) description = 'Un pavé durable et esthétique pour composer des sols harmonieux, résistants et faciles à entretenir.';
-    if (/dalle/i.test(category)) description = 'Une solution pratique pour structurer vos espaces extérieurs et répondre aux besoins de votre chantier.';
-    if (/bordure/i.test(category)) description = 'Une finition nette et durable pour délimiter vos voiries, trottoirs, espaces verts et aménagements.';
-    if (/caniveau/i.test(category)) description = 'Une solution pratique pour la collecte et l’évacuation des eaux pluviales de votre chantier.';
-    if (/agglo|hourdis|poutrelle/i.test(category)) description = 'Un élément préfabriqué en béton pour construire plus simplement et avancer avec confiance sur votre chantier.';
-    if (body.dataset.description) description = body.dataset.description;
-
-    var sheet = document.createElement('div');
-    sheet.className = 'page product-sheet';
-    var rowCount = technicalDetails ? (technicalDetails.match(/<tr/g) || []).length : 0;
-    var isDense = rowCount >= 9 || body.dataset.compactSheet === 'true';
-    if (isDense) sheet.classList.add('compact-product-sheet');
-    if (!categoryIds[category]) {
-      categoryIds[category] = 'catalogue-' + (index + 1);
-      sheet.id = categoryIds[category];
+    if (!familyByCategory[category]) {
+      familyByCategory[category] = { category: category, anchorPage: sourcePage, cards: [] };
+      families.push(familyByCategory[category]);
     }
-    sheet.setAttribute('data-family', category);
-    var dimText = photo.dataset.dim || '';
-    var formatBlock = dimText ? '<div class="sheet-format"><span>FORMAT</span><b>' + dimText + '</b></div>' : '';
-    var heroHeight = isDense ? null : technicalDetails ? 108 : 138;
-    var heroStyle = heroHeight ? ' style="height:' + heroHeight + 'mm"' : '';
-    sheet.innerHTML = '<div class="running-head"><div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div><div class="section-tag">CATALOGUE COMMERCIAL</div></div>' +
-      '<div class="sheet-kicker">NOS PRODUITS</div><div class="sheet-family">' + family + '</div><div class="sheet-rule"></div>' +
-      '<div class="sheet-hero"' + heroStyle + '><div class="sheet-image"><img src="' + image.getAttribute('src') + '" alt="' + image.alt + '"></div><div class="sheet-side"><div class="sheet-ref"><span>RÉFÉRENCE</span>' + ref + '</div>' + formatBlock + '</div></div>' +
-      '<div class="sheet-lower"><div class="sheet-info"><h3>Informations produit</h3><p><b>Produit :</b> ' + name + '</p>' + (technicalDetails ? '<div class="technical-details">' + technicalDetails + '</div>' : '<p>' + specs + '</p>') + '<p><b>Disponibilité :</b> selon projet et stock</p></div><div class="sheet-copy"><h3>' + name + '</h3><p>' + description + '</p><p>Disponible en plusieurs formats ou finitions selon les besoins du chantier.</p><div class="sheet-callout">CONTACTEZ-NOUS POUR VOTRE DEVIS</div></div></div><div class="running-foot"><span>SOMATRAC Matériaux — Catalogue Commercial</span><span></span></div>';
-    productFragment.appendChild(sheet);
+    familyByCategory[category].cards.push(card);
+  });
+  families.forEach(function(fam) {
+    fam.cards.sort(function(a, b) {
+      var aOrder = Number(a.querySelector('.body')?.dataset.catalogOrder) || 100;
+      var bOrder = Number(b.querySelector('.body')?.dataset.catalogOrder) || 100;
+      return aOrder - bOrder;
+    });
   });
 
-  if (servicesPage) servicesPage.parentNode.insertBefore(productFragment, servicesPage);
+  var categoryIds = {};
+  var indexRows = [];
+  var sheetIndex = 0;
+
+  families.forEach(function(fam) {
+    var category = fam.category;
+    var familyFragment = document.createDocumentFragment();
+    fam.cards.forEach(function(card) {
+      var family = category.split('&')[0].trim();
+      var photo = card.querySelector('.photo');
+      var image = photo.querySelector('img');
+      var body = card.querySelector('.body');
+      var ref = body.querySelector('.ref')?.textContent.trim().replace('RÉF. ', '') || 'SUR DEMANDE';
+      var name = body.querySelector('.name')?.textContent.trim() || 'Produit béton';
+      var specs = body.querySelector('.specs')?.innerHTML || '';
+      var technicalDetails = body.querySelector('.technical-details')?.innerHTML || '';
+      var description = 'Une solution SOMATRAC conçue pour accompagner vos projets de construction, de voirie et d’aménagement extérieur.';
+      if (/pavé/i.test(category)) description = 'Un pavé durable et esthétique pour composer des sols harmonieux, résistants et faciles à entretenir.';
+      if (/dalle/i.test(category)) description = 'Une solution pratique pour structurer vos espaces extérieurs et répondre aux besoins de votre chantier.';
+      if (/bordure/i.test(category)) description = 'Une finition nette et durable pour délimiter vos voiries, trottoirs, espaces verts et aménagements.';
+      if (/caniveau/i.test(category)) description = 'Une solution pratique pour la collecte et l’évacuation des eaux pluviales de votre chantier.';
+      if (/agglo|hourdis|poutrelle/i.test(category)) description = 'Un élément préfabriqué en béton pour construire plus simplement et avancer avec confiance sur votre chantier.';
+      if (body.dataset.description) description = body.dataset.description;
+
+      var sheet = document.createElement('div');
+      sheet.className = 'page product-sheet';
+      var rowCount = technicalDetails ? (technicalDetails.match(/<tr/g) || []).length : 0;
+      var isDense = rowCount >= 9 || body.dataset.compactSheet === 'true';
+      if (isDense) sheet.classList.add('compact-product-sheet');
+      if (!categoryIds[category]) {
+        categoryIds[category] = 'catalogue-' + (sheetIndex + 1);
+        sheet.id = categoryIds[category];
+      }
+      sheet.setAttribute('data-family', category);
+      applyThumb(sheet, category + ' ' + name);
+      var dimText = photo.dataset.dim || '';
+      // Pas de bloc usage sur les fiches denses (H6/H8, pavé gazon) : elles sont déjà
+      // calibrées au mm près pour tenir sur une seule page A4 à l'impression.
+      var usage = isDense ? '' : usageBlock(familyKey(category + ' ' + name), specs + technicalDetails);
+      indexRows.push({ fam: family, ref: ref, name: name, dim: dimText });
+      var formatBlock = dimText ? '<div class="sheet-format"><span>FORMAT</span><b>' + dimText + '</b></div>' : '';
+      var heroHeight = isDense ? null : technicalDetails ? 108 : 138;
+      var heroStyle = heroHeight ? ' style="height:' + heroHeight + 'mm"' : '';
+      sheet.innerHTML = '<div class="running-head"><div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div><div class="section-tag">CATALOGUE COMMERCIAL</div></div>' +
+        '<div class="sheet-kicker">NOS PRODUITS</div><div class="sheet-family">' + family + '</div><div class="sheet-rule"></div>' +
+        '<div class="sheet-hero"' + heroStyle + '><div class="sheet-image"><img src="' + image.getAttribute('src') + '" alt="' + image.alt + '"></div><div class="sheet-side"><div class="sheet-ref"><span>RÉFÉRENCE</span>' + ref + '</div>' + formatBlock + '</div></div>' +
+        '<div class="sheet-lower"><div class="sheet-info"><h3>Informations produit</h3><p><b>Produit :</b> ' + name + '</p>' + (technicalDetails ? '<div class="technical-details">' + technicalDetails + '</div>' : '<p>' + specs + '</p>') + '<p><b>Disponibilité :</b> selon projet et stock</p></div><div class="sheet-copy"><h3>' + name + '</h3><p>' + description + '</p><p>Disponible en plusieurs formats ou finitions selon les besoins du chantier.</p>' + usage + '<div class="sheet-callout">CONTACTEZ-NOUS POUR VOTRE DEVIS</div></div></div><div class="running-foot"><span>SOMATRAC Matériaux — Catalogue Commercial</span><span></span></div>';
+      familyFragment.appendChild(sheet);
+      sheetIndex++;
+    });
+    fam.anchorPage.parentNode.insertBefore(familyFragment, fam.anchorPage);
+  });
+
   Object.keys(categoryIds).forEach(function(category) {
     var targetId = categoryIds[category];
     var buttonTarget = categoryTarget(category);
@@ -1560,6 +1940,41 @@
       });
     }, { rootMargin: '-25% 0px -65% 0px' });
     generatedSections.forEach(function(section) { generatedObserver.observe(section); });
+  }
+
+  /* ---- Onglets de tranche sur les pages statiques (à propos, intros, services) ---- */
+  document.querySelectorAll('.page:not(.legacy-catalog-page):not(.cover-modern):not(.back):not(.product-sheet)').forEach(function(pageEl) {
+    var hint = pageEl.id + ' ' + (pageEl.querySelector('.section-tag')?.textContent || '');
+    applyThumb(pageEl, hint);
+  });
+
+  /* ---- Index des références : récapitulatif généré en fin de catalogue ---- */
+  var backPage = document.querySelector('.page.back');
+  if (backPage && indexRows.length) {
+    var groups = {};
+    var famOrder = [];
+    indexRows.forEach(function(r) {
+      if (!groups[r.fam]) { groups[r.fam] = []; famOrder.push(r.fam); }
+      groups[r.fam].push(r);
+    });
+    var rowsHtml = famOrder.map(function(fam) {
+      var rows = groups[fam].map(function(r) {
+        return '<tr><td class="r">' + r.ref + '</td><td class="n">' + r.name + '</td><td class="f">' + fam + '</td><td class="d">' + (r.dim || '—') + '</td></tr>';
+      }).join('');
+      return '<tr class="fam-head"><td colspan="4">' + fam + '</td></tr>' + rows;
+    }).join('');
+    var indexPage = document.createElement('div');
+    indexPage.className = 'page';
+    indexPage.id = 'index-references';
+    indexPage.innerHTML =
+      '<div class="running-head"><div class="brand"><img class="brand-logo" src="logo.png" alt="SOMATRAC Matériaux"></div><div class="section-tag">INDEX DES RÉFÉRENCES</div></div>' +
+      '<div class="eyebrow-line"><span class="num">—</span><span class="rule"></span></div>' +
+      '<div class="section-title"><h2>Index des références</h2><div class="sub">Retrouvez rapidement une référence, son produit et son format par famille.</div></div>' +
+      '<table class="index-table"><thead><tr><th>Référence</th><th>Produit</th><th>Famille</th><th>Format</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+      '<div class="index-legend"><span><b>Note —</b> formats indicatifs, à confirmer selon disponibilité et stock au moment de la commande.</span></div>' +
+      '<div class="running-foot"><span>SOMATRAC Matériaux — Catalogue Commercial</span><span></span></div>';
+    applyThumb(indexPage, 'services index');
+    backPage.parentNode.insertBefore(indexPage, backPage);
   }
 
   document.querySelectorAll('.page:not(.legacy-catalog-page)').forEach(function(pageEl, i) {
